@@ -20,9 +20,9 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 			eventEmitter.broadcast({ type: 'huntMultiplierShow' });
 			eventEmitter.broadcast({
 				type: 'huntMultiplierUpdate',
-				value: data.huntMultiplier,
+				huntMultiplier: data.huntMultiplier,
 				cascadeCount: 0,
-				cap: 50,
+				multCap: 50,
 			});
 		}
 
@@ -77,15 +77,15 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 	},
 
 	updateHuntMultiplier: async ({ data }) => {
-		stateGame.huntMultiplier = data.value;
+		stateGame.huntMultiplier = data.huntMultiplier;
 		stateGame.cascadeCount = data.cascadeCount;
 
 		eventEmitter.broadcast({ type: 'huntMultiplierShow' });
 		eventEmitter.broadcast({
 			type: 'huntMultiplierUpdate',
-			value: data.value,
+			huntMultiplier: data.huntMultiplier,
 			cascadeCount: data.cascadeCount,
-			cap: data.cap,
+			multCap: data.multCap,
 		});
 
 		eventEmitter.broadcast({
@@ -257,9 +257,9 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		stateGame.huntMultiplier = multiplier;
 		eventEmitter.broadcast({
 			type: 'huntMultiplierUpdate',
-			value: multiplier,
+			huntMultiplier: multiplier,
 			cascadeCount: stateGame.cascadeCount,
-			cap: 500,
+			multCap: 500,
 		});
 	},
 

@@ -95,7 +95,7 @@ import { Authenticate, LoaderStakeEngine, EnableHotkey } from 'components-shared
   $effect(() => {
     eventEmitter.on('huntMultiplierShow', () => { visible = true; });
     eventEmitter.on('huntMultiplierUpdate', (data) => {
-      multiplier = data.value;
+      multiplier = data.huntMultiplier;
       animation = 'increase';
     });
     eventEmitter.on('huntMultiplierHide', () => { visible = false; });
