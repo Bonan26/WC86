@@ -1,0 +1,101 @@
+{
+	"type": "free_spins_session",
+	"timestamp": 1704067200004,
+	"sessionId": "fs_session_001",
+	"bet": {
+		"amount": 100,
+		"currency": "USD",
+		"volatilityMode": "PACK"
+	},
+	"trigger": {
+		"spinId": "spin_trigger_001",
+		"scatterCount": 4,
+		"scatterPositions": [
+			{"row": 0, "col": 2},
+			{"row": 1, "col": 4},
+			{"row": 2, "col": 1},
+			{"row": 3, "col": 5}
+		],
+		"freeSpinsAwarded": 12
+	},
+	"gridSize": {
+		"rows": 5,
+		"cols": 6
+	},
+	"totalFreeSpins": 12,
+	"currentSpin": 1,
+	"persistentMultiplier": 1,
+	"territoryLevel": 0,
+	"spins": [
+		{
+			"spinIndex": 1,
+			"board": [
+				["BOSS_WOLF", "BOSS_WOLF", "BOSS_WOLF", "COCKTAIL", "CHAIN", "MYSTIC_WOLF"],
+				["SHADOW_WOLF", "VINYL", "SHADES", "SHADES", "COCKTAIL", "CHAIN"],
+				["STORM_WOLF", "VINYL", "BOSS_WOLF", "VINYL", "SHADES", "COCKTAIL"],
+				["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
+				["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+			],
+			"wins": [
+				{
+					"symbolId": "BOSS_WOLF",
+					"count": 3,
+					"positions": [
+						{"row": 0, "col": 0},
+						{"row": 0, "col": 1},
+						{"row": 0, "col": 2}
+					],
+					"ways": 8,
+					"baseWin": 150,
+					"multiplier": 1,
+					"totalWin": 150
+				}
+			],
+			"spinWin": 150,
+			"cascades": [
+				{
+					"cascadeIndex": 1,
+					"wins": [
+						{
+							"symbolId": "SHADOW_WOLF",
+							"count": 3,
+							"baseWin": 100,
+							"multiplier": 2,
+							"totalWin": 200
+						}
+					],
+					"cascadeWin": 200,
+					"huntMultiplier": 2
+				}
+			],
+			"totalSpinWin": 350,
+			"huntMultiplierAfter": 2,
+			"persistentMultiplierAfter": 2
+		},
+		{
+			"spinIndex": 2,
+			"board": [
+				["VINYL", "SHADES", "TERRITORY", "COCKTAIL", "CHAIN", "MYSTIC_WOLF"],
+				["SHADOW_WOLF", "VINYL", "TERRITORY", "SHADES", "COCKTAIL", "CHAIN"],
+				["STORM_WOLF", "VINYL", "TERRITORY", "VINYL", "SHADES", "COCKTAIL"],
+				["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
+				["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+			],
+			"wins": [],
+			"spinWin": 0,
+			"cascades": [],
+			"territoryCollected": 3,
+			"territoryExpansion": {
+				"triggered": true,
+				"newGridSize": {"rows": 6, "cols": 7},
+				"newLevel": 1
+			},
+			"totalSpinWin": 0,
+			"huntMultiplierAfter": 1,
+			"persistentMultiplierAfter": 2
+		}
+	],
+	"retriggers": [],
+	"totalSessionWin": 350,
+	"finalMultiplier": 2
+}

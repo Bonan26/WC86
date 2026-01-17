@@ -1,0 +1,82 @@
+{
+	"type": "spin_result",
+	"timestamp": 1704067200003,
+	"spinId": "spin_howlchain_001",
+	"bet": {
+		"amount": 100,
+		"currency": "USD",
+		"volatilityMode": "PACK"
+	},
+	"initialBoard": [
+		["HOWLING_WILD", "BOSS_WOLF", "HOWLING_WILD", "COCKTAIL", "CHAIN", "MYSTIC_WOLF"],
+		["SHADOW_WOLF", "HOWLING_WILD", "VINYL", "SHADES", "COCKTAIL", "CHAIN"],
+		["STORM_WOLF", "VINYL", "BOSS_WOLF", "VINYL", "SHADES", "COCKTAIL"],
+		["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
+		["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+	],
+	"gridSize": {
+		"rows": 5,
+		"cols": 6
+	},
+	"wins": [
+		{
+			"symbolId": "BOSS_WOLF",
+			"count": 3,
+			"positions": [
+				{"row": 0, "col": 0},
+				{"row": 0, "col": 1},
+				{"row": 0, "col": 2}
+			],
+			"ways": 8,
+			"baseWin": 150,
+			"multiplier": 1,
+			"totalWin": 150
+		}
+	],
+	"totalWin": 150,
+	"huntMultiplier": 1,
+	"features": {
+		"packSplit": null,
+		"howlChain": {
+			"wildPositions": [
+				{"row": 0, "col": 0, "multiplier": 2},
+				{"row": 0, "col": 2, "multiplier": 3},
+				{"row": 1, "col": 1, "multiplier": 2}
+			],
+			"chainConnections": [
+				{
+					"wild1": {"row": 0, "col": 0},
+					"wild2": {"row": 1, "col": 1},
+					"connectionType": "adjacent"
+				},
+				{
+					"wild1": {"row": 0, "col": 2},
+					"wild2": {"row": 1, "col": 1},
+					"connectionType": "adjacent"
+				}
+			],
+			"chainType": "multiplicative",
+			"totalChainMultiplier": 12,
+			"calculationBreakdown": "2 × 3 × 2 = 12 (3+ wilds = multiplicative)",
+			"winsWithChain": [
+				{
+					"symbolId": "BOSS_WOLF",
+					"count": 3,
+					"positions": [
+						{"row": 0, "col": 0},
+						{"row": 0, "col": 1},
+						{"row": 0, "col": 2}
+					],
+					"ways": 8,
+					"baseWin": 150,
+					"multiplier": 12,
+					"totalWin": 1800
+				}
+			],
+			"totalWinWithChain": 1800
+		},
+		"territoryExpand": null
+	},
+	"freeSpins": null,
+	"cascades": []
+}

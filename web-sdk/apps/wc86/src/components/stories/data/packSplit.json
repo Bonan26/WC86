@@ -1,0 +1,69 @@
+{
+	"type": "spin_result",
+	"timestamp": 1704067200002,
+	"spinId": "spin_packsplit_001",
+	"bet": {
+		"amount": 100,
+		"currency": "USD",
+		"volatilityMode": "ALPHA"
+	},
+	"initialBoard": [
+		["VINYL", "SHADES", "ALPHA_WILD", "BOSS_WOLF", "CHAIN", "MYSTIC_WOLF"],
+		["SHADOW_WOLF", "COCKTAIL", "VINYL", "SHADOW_WOLF", "COCKTAIL", "CHAIN"],
+		["STORM_WOLF", "VINYL", "BOSS_WOLF", "STORM_WOLF", "SHADES", "COCKTAIL"],
+		["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
+		["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+	],
+	"gridSize": {
+		"rows": 5,
+		"cols": 6
+	},
+	"wins": [],
+	"totalWin": 0,
+	"huntMultiplier": 1,
+	"features": {
+		"packSplit": {
+			"triggerPosition": {"row": 0, "col": 2},
+			"wildSymbol": "ALPHA_WILD",
+			"multiplier": 3,
+			"duplicatedSymbols": [
+				{
+					"originalPosition": {"row": 0, "col": 3},
+					"symbolId": "BOSS_WOLF",
+					"duplicatedTo": [
+						{"row": 0, "col": 0},
+						{"row": 0, "col": 1}
+					]
+				}
+			],
+			"boardAfterSplit": [
+				["BOSS_WOLF", "BOSS_WOLF", "ALPHA_WILD", "BOSS_WOLF", "CHAIN", "MYSTIC_WOLF"],
+				["SHADOW_WOLF", "COCKTAIL", "VINYL", "SHADOW_WOLF", "COCKTAIL", "CHAIN"],
+				["STORM_WOLF", "VINYL", "BOSS_WOLF", "STORM_WOLF", "SHADES", "COCKTAIL"],
+				["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
+				["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+			],
+			"winsAfterSplit": [
+				{
+					"symbolId": "BOSS_WOLF",
+					"count": 4,
+					"positions": [
+						{"row": 0, "col": 0},
+						{"row": 0, "col": 1},
+						{"row": 0, "col": 2},
+						{"row": 0, "col": 3}
+					],
+					"ways": 16,
+					"baseWin": 300,
+					"multiplier": 3,
+					"totalWin": 900
+				}
+			],
+			"totalWinFromSplit": 900
+		},
+		"howlChain": null,
+		"territoryExpand": null
+	},
+	"freeSpins": null,
+	"cascades": []
+}

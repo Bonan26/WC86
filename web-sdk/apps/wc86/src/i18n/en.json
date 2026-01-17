@@ -1,0 +1,92 @@
+{
+	"game": {
+		"title": "Wolf Club 86",
+		"loading": "Loading...",
+		"tapToContinue": "Tap to continue",
+		"pressToContinue": "Press to continue",
+		"enableSound": "Enable Sound"
+	},
+	"volatility": {
+		"title": "Choose Your Pack",
+		"loneWolf": {
+			"name": "Lone Wolf",
+			"description": "Low volatility - More frequent, smaller wins",
+			"maxWin": "Max Win: 10,000x"
+		},
+		"pack": {
+			"name": "Pack",
+			"description": "Medium volatility - Balanced risk and reward",
+			"maxWin": "Max Win: 25,000x"
+		},
+		"alpha": {
+			"name": "Alpha",
+			"description": "High volatility - Rare but massive wins",
+			"maxWin": "Max Win: 50,000x"
+		}
+	},
+	"features": {
+		"huntMultiplier": "Hunt Multiplier",
+		"cascadeWin": "Cascade Win",
+		"territoryProgress": "Territory Progress",
+		"territoryExpand": "Territory Expanded!",
+		"gridSize": "Grid: {{cols}}x{{rows}}",
+		"packSplit": "Pack Split",
+		"howlChain": "Howl Chain",
+		"wildMultiplier": "Wild x{{value}}"
+	},
+	"freeSpins": {
+		"title": "Pack Hunt",
+		"triggered": "Pack Hunt Triggered!",
+		"spinsAwarded": "{{count}} Free Spins Awarded",
+		"remaining": "{{current}} of {{total}} Spins",
+		"retrigger": "+{{count}} Extra Spins!",
+		"totalWin": "Total Win"
+	},
+	"alphaDomination": {
+		"title": "Alpha Domination",
+		"triggered": "Alpha Domination Activated!",
+		"startingMultiplier": "Starting Multiplier: x{{value}}",
+		"maxMultiplier": "Max Multiplier: x{{value}}"
+	},
+	"wins": {
+		"bigWin": "Big Win!",
+		"megaWin": "Mega Win!",
+		"epicWin": "Epic Win!",
+		"maxWin": "Maximum Win!",
+		"totalWin": "Total Win"
+	},
+	"symbols": {
+		"bossWolf": "Boss Wolf",
+		"shadowWolf": "Shadow Wolf",
+		"stormWolf": "Storm Wolf",
+		"mysticWolf": "Mystic Wolf",
+		"vinyl": "Vinyl Record",
+		"cocktail": "Neon Cocktail",
+		"shades": "80s Shades",
+		"chain": "Gold Chain",
+		"alphaWild": "Alpha Wolf (Wild)",
+		"howlingWild": "Howling Wild",
+		"moonScatter": "Moon Scatter",
+		"territory": "Territory"
+	},
+	"ui": {
+		"balance": "Balance",
+		"bet": "Bet",
+		"win": "Win",
+		"spin": "Spin",
+		"autoplay": "Auto",
+		"turbo": "Turbo",
+		"menu": "Menu",
+		"paytable": "Paytable",
+		"settings": "Settings",
+		"history": "History",
+		"sound": "Sound",
+		"music": "Music",
+		"close": "Close"
+	},
+	"errors": {
+		"insufficientBalance": "Insufficient balance",
+		"connectionLost": "Connection lost",
+		"tryAgain": "Please try again"
+	}
+}

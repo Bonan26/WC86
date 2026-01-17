@@ -1,0 +1,47 @@
+{
+	"type": "spin_result",
+	"timestamp": 1704067200000,
+	"spinId": "spin_base_001",
+	"bet": {
+		"amount": 100,
+		"currency": "USD",
+		"volatilityMode": "PACK"
+	},
+	"initialBoard": [
+		["BOSS_WOLF", "VINYL", "SHADES", "COCKTAIL", "CHAIN", "MYSTIC_WOLF"],
+		["SHADOW_WOLF", "BOSS_WOLF", "VINYL", "SHADES", "COCKTAIL", "CHAIN"],
+		["STORM_WOLF", "SHADOW_WOLF", "BOSS_WOLF", "VINYL", "SHADES", "COCKTAIL"],
+		["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "BOSS_WOLF", "VINYL", "SHADES"],
+		["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "BOSS_WOLF", "VINYL"]
+	],
+	"gridSize": {
+		"rows": 5,
+		"cols": 6
+	},
+	"wins": [
+		{
+			"symbolId": "BOSS_WOLF",
+			"count": 5,
+			"positions": [
+				{"row": 0, "col": 0},
+				{"row": 1, "col": 1},
+				{"row": 2, "col": 2},
+				{"row": 3, "col": 3},
+				{"row": 4, "col": 4}
+			],
+			"ways": 32,
+			"baseWin": 500,
+			"multiplier": 1,
+			"totalWin": 500
+		}
+	],
+	"totalWin": 500,
+	"huntMultiplier": 1,
+	"features": {
+		"packSplit": null,
+		"howlChain": null,
+		"territoryExpand": null
+	},
+	"freeSpins": null,
+	"cascades": []
+}

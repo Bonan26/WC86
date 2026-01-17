@@ -1,0 +1,117 @@
+{
+	"type": "alpha_domination_session",
+	"timestamp": 1704067200005,
+	"sessionId": "ad_session_001",
+	"bet": {
+		"amount": 100,
+		"currency": "USD",
+		"volatilityMode": "ALPHA"
+	},
+	"trigger": {
+		"spinId": "spin_alpha_trigger_001",
+		"triggerType": "5_scatters_in_free_spins",
+		"scatterCount": 5,
+		"scatterPositions": [
+			{"row": 0, "col": 2},
+			{"row": 1, "col": 0},
+			{"row": 1, "col": 4},
+			{"row": 2, "col": 3},
+			{"row": 3, "col": 5}
+		]
+	},
+	"gridSize": {
+		"rows": 8,
+		"cols": 8
+	},
+	"startingMultiplier": 5,
+	"maxMultiplier": 500,
+	"currentMultiplier": 5,
+	"totalFreeSpins": 10,
+	"currentSpin": 1,
+	"spins": [
+		{
+			"spinIndex": 1,
+			"board": [
+				["BOSS_WOLF", "BOSS_WOLF", "ALPHA_WILD", "BOSS_WOLF", "CHAIN", "MYSTIC_WOLF", "VINYL", "SHADES"],
+				["SHADOW_WOLF", "HOWLING_WILD", "VINYL", "SHADOW_WOLF", "COCKTAIL", "CHAIN", "BOSS_WOLF", "COCKTAIL"],
+				["STORM_WOLF", "VINYL", "BOSS_WOLF", "STORM_WOLF", "SHADES", "COCKTAIL", "SHADOW_WOLF", "VINYL"],
+				["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES", "STORM_WOLF", "CHAIN"],
+				["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL", "MYSTIC_WOLF", "SHADES"],
+				["VINYL", "CHAIN", "MYSTIC_WOLF", "COCKTAIL", "SHADOW_WOLF", "BOSS_WOLF", "CHAIN", "COCKTAIL"],
+				["SHADES", "VINYL", "CHAIN", "BOSS_WOLF", "STORM_WOLF", "SHADOW_WOLF", "VINYL", "BOSS_WOLF"],
+				["COCKTAIL", "SHADES", "VINYL", "MYSTIC_WOLF", "CHAIN", "STORM_WOLF", "SHADES", "SHADOW_WOLF"]
+			],
+			"wins": [
+				{
+					"symbolId": "BOSS_WOLF",
+					"count": 4,
+					"positions": [
+						{"row": 0, "col": 0},
+						{"row": 0, "col": 1},
+						{"row": 0, "col": 2},
+						{"row": 0, "col": 3}
+					],
+					"ways": 128,
+					"baseWin": 500,
+					"multiplier": 5,
+					"totalWin": 2500
+				}
+			],
+			"features": {
+				"packSplit": {
+					"triggerPosition": {"row": 0, "col": 2},
+					"multiplier": 2,
+					"additionalWin": 1000
+				},
+				"howlChain": {
+					"wildPositions": [
+						{"row": 0, "col": 2, "multiplier": 3},
+						{"row": 1, "col": 1, "multiplier": 2}
+					],
+					"chainMultiplier": 6
+				}
+			},
+			"cascades": [
+				{
+					"cascadeIndex": 1,
+					"wins": [
+						{
+							"symbolId": "SHADOW_WOLF",
+							"count": 5,
+							"baseWin": 400,
+							"multiplier": 6,
+							"totalWin": 2400
+						}
+					],
+					"cascadeWin": 2400,
+					"multiplierIncrease": 1
+				},
+				{
+					"cascadeIndex": 2,
+					"wins": [
+						{
+							"symbolId": "STORM_WOLF",
+							"count": 4,
+							"baseWin": 300,
+							"multiplier": 7,
+							"totalWin": 2100
+						}
+					],
+					"cascadeWin": 2100,
+					"multiplierIncrease": 1
+				}
+			],
+			"spinWin": 2500,
+			"totalSpinWin": 9500,
+			"multiplierAfter": 7
+		}
+	],
+	"totalSessionWin": 9500,
+	"finalMultiplier": 7,
+	"maxWinReached": false,
+	"maxWinCap": {
+		"LONE_WOLF": 10000,
+		"PACK": 25000,
+		"ALPHA": 50000
+	}
+}
