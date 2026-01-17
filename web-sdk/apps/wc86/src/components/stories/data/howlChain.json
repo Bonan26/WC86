@@ -8,11 +8,11 @@
 		"volatilityMode": "PACK"
 	},
 	"initialBoard": [
-		["HOWLING_WILD", "BOSS_WOLF", "HOWLING_WILD", "COCKTAIL", "CHAIN", "MYSTIC_WOLF"],
-		["SHADOW_WOLF", "HOWLING_WILD", "VINYL", "SHADES", "COCKTAIL", "CHAIN"],
-		["STORM_WOLF", "VINYL", "BOSS_WOLF", "VINYL", "SHADES", "COCKTAIL"],
-		["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
-		["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+		["HOWLING_WILD", "BOSS_WOLF", "HOWLING_WILD", "DISCO_BALL", "DICE", "HUSTLER"],
+		["TECH_BRO", "HOWLING_WILD", "COCKTAIL", "VIP_CARD", "DISCO_BALL", "DICE"],
+		["DIAMOND_HANDS", "COCKTAIL", "BOSS_WOLF", "COCKTAIL", "VIP_CARD", "DISCO_BALL"],
+		["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD"],
+		["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL"]
 	],
 	"gridSize": {
 		"rows": 5,
@@ -23,9 +23,9 @@
 			"symbolId": "BOSS_WOLF",
 			"count": 3,
 			"positions": [
-				{"row": 0, "col": 0},
-				{"row": 0, "col": 1},
-				{"row": 0, "col": 2}
+				{"reel": 0, "row": 0},
+				{"reel": 1, "row": 0},
+				{"reel": 2, "row": 0}
 			],
 			"ways": 8,
 			"baseWin": 150,
@@ -39,19 +39,19 @@
 		"packSplit": null,
 		"howlChain": {
 			"wildPositions": [
-				{"row": 0, "col": 0, "multiplier": 2},
-				{"row": 0, "col": 2, "multiplier": 3},
-				{"row": 1, "col": 1, "multiplier": 2}
+				{"reel": 0, "row": 0, "multiplier": 2},
+				{"reel": 2, "row": 0, "multiplier": 3},
+				{"reel": 1, "row": 1, "multiplier": 2}
 			],
 			"chainConnections": [
 				{
-					"wild1": {"row": 0, "col": 0},
-					"wild2": {"row": 1, "col": 1},
+					"wild1": {"reel": 0, "row": 0},
+					"wild2": {"reel": 1, "row": 1},
 					"connectionType": "adjacent"
 				},
 				{
-					"wild1": {"row": 0, "col": 2},
-					"wild2": {"row": 1, "col": 1},
+					"wild1": {"reel": 2, "row": 0},
+					"wild2": {"reel": 1, "row": 1},
 					"connectionType": "adjacent"
 				}
 			],
@@ -63,9 +63,9 @@
 					"symbolId": "BOSS_WOLF",
 					"count": 3,
 					"positions": [
-						{"row": 0, "col": 0},
-						{"row": 0, "col": 1},
-						{"row": 0, "col": 2}
+						{"reel": 0, "row": 0},
+						{"reel": 1, "row": 0},
+						{"reel": 2, "row": 0}
 					],
 					"ways": 8,
 					"baseWin": 150,

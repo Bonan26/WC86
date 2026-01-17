@@ -8,11 +8,11 @@
 		"volatilityMode": "PACK"
 	},
 	"initialBoard": [
-		["BOSS_WOLF", "BOSS_WOLF", "BOSS_WOLF", "COCKTAIL", "CHAIN", "MYSTIC_WOLF"],
-		["SHADOW_WOLF", "SHADOW_WOLF", "SHADOW_WOLF", "SHADES", "COCKTAIL", "CHAIN"],
-		["STORM_WOLF", "VINYL", "BOSS_WOLF", "VINYL", "SHADES", "COCKTAIL"],
-		["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
-		["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+		["BOSS_WOLF", "BOSS_WOLF", "BOSS_WOLF", "DISCO_BALL", "DICE", "HUSTLER"],
+		["TECH_BRO", "TECH_BRO", "TECH_BRO", "VIP_CARD", "DISCO_BALL", "DICE"],
+		["DIAMOND_HANDS", "COCKTAIL", "BOSS_WOLF", "COCKTAIL", "VIP_CARD", "DISCO_BALL"],
+		["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD"],
+		["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL"]
 	],
 	"gridSize": {
 		"rows": 5,
@@ -33,7 +33,7 @@
 			"totalWin": 150
 		},
 		{
-			"symbolId": "SHADOW_WOLF",
+			"symbolId": "TECH_BRO",
 			"count": 3,
 			"positions": [
 				{"row": 1, "col": 0},
@@ -66,23 +66,23 @@
 				{"row": 1, "col": 2}
 			],
 			"newSymbols": [
-				{"position": {"row": 0, "col": 0}, "symbolId": "STORM_WOLF"},
-				{"position": {"row": 0, "col": 1}, "symbolId": "STORM_WOLF"},
-				{"position": {"row": 0, "col": 2}, "symbolId": "STORM_WOLF"},
-				{"position": {"row": 1, "col": 0}, "symbolId": "VINYL"},
-				{"position": {"row": 1, "col": 1}, "symbolId": "COCKTAIL"},
-				{"position": {"row": 1, "col": 2}, "symbolId": "SHADES"}
+				{"position": {"row": 0, "col": 0}, "symbolId": "DIAMOND_HANDS"},
+				{"position": {"row": 0, "col": 1}, "symbolId": "DIAMOND_HANDS"},
+				{"position": {"row": 0, "col": 2}, "symbolId": "DIAMOND_HANDS"},
+				{"position": {"row": 1, "col": 0}, "symbolId": "COCKTAIL"},
+				{"position": {"row": 1, "col": 1}, "symbolId": "DISCO_BALL"},
+				{"position": {"row": 1, "col": 2}, "symbolId": "VIP_CARD"}
 			],
 			"boardAfter": [
-				["STORM_WOLF", "STORM_WOLF", "STORM_WOLF", "COCKTAIL", "CHAIN", "MYSTIC_WOLF"],
-				["VINYL", "COCKTAIL", "SHADES", "SHADES", "COCKTAIL", "CHAIN"],
-				["STORM_WOLF", "VINYL", "BOSS_WOLF", "VINYL", "SHADES", "COCKTAIL"],
-				["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
-				["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+				["DIAMOND_HANDS", "DIAMOND_HANDS", "DIAMOND_HANDS", "DISCO_BALL", "DICE", "HUSTLER"],
+				["COCKTAIL", "DISCO_BALL", "VIP_CARD", "VIP_CARD", "DISCO_BALL", "DICE"],
+				["DIAMOND_HANDS", "COCKTAIL", "BOSS_WOLF", "COCKTAIL", "VIP_CARD", "DISCO_BALL"],
+				["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD"],
+				["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL"]
 			],
 			"wins": [
 				{
-					"symbolId": "STORM_WOLF",
+					"symbolId": "DIAMOND_HANDS",
 					"count": 3,
 					"positions": [
 						{"row": 0, "col": 0},

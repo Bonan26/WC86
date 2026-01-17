@@ -11,6 +11,8 @@ import type { EmitterEventPackSplit } from '../components/custom/PackSplitAnimat
 import type { EmitterEventHowlChain } from '../components/custom/HowlChainEffect.svelte';
 import type { EmitterEventGridExpansion } from '../components/custom/GridExpansion.svelte';
 import type { EmitterEventAlphaDomination } from '../components/custom/AlphaDominationIntro.svelte';
+import type { EmitterEventTerritoryExpand } from '../components/custom/TerritoryExpand.svelte';
+import type { EmitterEventVolatilitySelector } from '../components/custom/VolatilitySelector.svelte';
 
 export type EmitterEventGame =
 	| EmitterEventBoard
@@ -25,4 +27,6 @@ export type EmitterEventGame =
 	| EmitterEventPackSplit
 	| EmitterEventHowlChain
 	| EmitterEventGridExpansion
-	| EmitterEventAlphaDomination;
+	| EmitterEventAlphaDomination
+	| EmitterEventTerritoryExpand
+	| EmitterEventVolatilitySelector;

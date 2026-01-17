@@ -11,10 +11,10 @@
 		"spinId": "spin_trigger_001",
 		"scatterCount": 4,
 		"scatterPositions": [
-			{"row": 0, "col": 2},
-			{"row": 1, "col": 4},
-			{"row": 2, "col": 1},
-			{"row": 3, "col": 5}
+			{"reel": 2, "row": 0},
+			{"reel": 4, "row": 1},
+			{"reel": 1, "row": 2},
+			{"reel": 5, "row": 3}
 		],
 		"freeSpinsAwarded": 12
 	},
@@ -30,20 +30,20 @@
 		{
 			"spinIndex": 1,
 			"board": [
-				["BOSS_WOLF", "BOSS_WOLF", "BOSS_WOLF", "COCKTAIL", "CHAIN", "MYSTIC_WOLF"],
-				["SHADOW_WOLF", "VINYL", "SHADES", "SHADES", "COCKTAIL", "CHAIN"],
-				["STORM_WOLF", "VINYL", "BOSS_WOLF", "VINYL", "SHADES", "COCKTAIL"],
-				["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
-				["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+				["BOSS_WOLF", "BOSS_WOLF", "BOSS_WOLF", "DISCO_BALL", "DICE", "HUSTLER"],
+				["TECH_BRO", "COCKTAIL", "VIP_CARD", "VIP_CARD", "DISCO_BALL", "DICE"],
+				["DIAMOND_HANDS", "COCKTAIL", "BOSS_WOLF", "COCKTAIL", "VIP_CARD", "DISCO_BALL"],
+				["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD"],
+				["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL"]
 			],
 			"wins": [
 				{
 					"symbolId": "BOSS_WOLF",
 					"count": 3,
 					"positions": [
-						{"row": 0, "col": 0},
-						{"row": 0, "col": 1},
-						{"row": 0, "col": 2}
+						{"reel": 0, "row": 0},
+						{"reel": 1, "row": 0},
+						{"reel": 2, "row": 0}
 					],
 					"ways": 8,
 					"baseWin": 150,
@@ -57,7 +57,7 @@
 					"cascadeIndex": 1,
 					"wins": [
 						{
-							"symbolId": "SHADOW_WOLF",
+							"symbolId": "TECH_BRO",
 							"count": 3,
 							"baseWin": 100,
 							"multiplier": 2,
@@ -75,11 +75,11 @@
 		{
 			"spinIndex": 2,
 			"board": [
-				["VINYL", "SHADES", "TERRITORY", "COCKTAIL", "CHAIN", "MYSTIC_WOLF"],
-				["SHADOW_WOLF", "VINYL", "TERRITORY", "SHADES", "COCKTAIL", "CHAIN"],
-				["STORM_WOLF", "VINYL", "TERRITORY", "VINYL", "SHADES", "COCKTAIL"],
-				["MYSTIC_WOLF", "STORM_WOLF", "SHADOW_WOLF", "CHAIN", "VINYL", "SHADES"],
-				["CHAIN", "MYSTIC_WOLF", "STORM_WOLF", "SHADES", "BOSS_WOLF", "VINYL"]
+				["COCKTAIL", "VIP_CARD", "TERRITORY", "DISCO_BALL", "DICE", "HUSTLER"],
+				["TECH_BRO", "COCKTAIL", "TERRITORY", "VIP_CARD", "DISCO_BALL", "DICE"],
+				["DIAMOND_HANDS", "COCKTAIL", "TERRITORY", "COCKTAIL", "VIP_CARD", "DISCO_BALL"],
+				["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD"],
+				["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL"]
 			],
 			"wins": [],
 			"spinWin": 0,
