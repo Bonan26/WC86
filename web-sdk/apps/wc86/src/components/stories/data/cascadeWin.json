@@ -23,9 +23,9 @@
 			"symbolId": "BOSS_WOLF",
 			"count": 3,
 			"positions": [
-				{"row": 0, "col": 0},
-				{"row": 0, "col": 1},
-				{"row": 0, "col": 2}
+				{"reel": 0, "row": 0},
+				{"reel": 1, "row": 0},
+				{"reel": 2, "row": 0}
 			],
 			"ways": 8,
 			"baseWin": 150,
@@ -36,9 +36,9 @@
 			"symbolId": "TECH_BRO",
 			"count": 3,
 			"positions": [
-				{"row": 1, "col": 0},
-				{"row": 1, "col": 1},
-				{"row": 1, "col": 2}
+				{"reel": 0, "row": 1},
+				{"reel": 1, "row": 1},
+				{"reel": 2, "row": 1}
 			],
 			"ways": 8,
 			"baseWin": 120,
@@ -58,20 +58,20 @@
 		{
 			"cascadeIndex": 1,
 			"removedPositions": [
-				{"row": 0, "col": 0},
-				{"row": 0, "col": 1},
-				{"row": 0, "col": 2},
-				{"row": 1, "col": 0},
-				{"row": 1, "col": 1},
-				{"row": 1, "col": 2}
+				{"reel": 0, "row": 0},
+				{"reel": 1, "row": 0},
+				{"reel": 2, "row": 0},
+				{"reel": 0, "row": 1},
+				{"reel": 1, "row": 1},
+				{"reel": 2, "row": 1}
 			],
 			"newSymbols": [
-				{"position": {"row": 0, "col": 0}, "symbolId": "DIAMOND_HANDS"},
-				{"position": {"row": 0, "col": 1}, "symbolId": "DIAMOND_HANDS"},
-				{"position": {"row": 0, "col": 2}, "symbolId": "DIAMOND_HANDS"},
-				{"position": {"row": 1, "col": 0}, "symbolId": "COCKTAIL"},
-				{"position": {"row": 1, "col": 1}, "symbolId": "DISCO_BALL"},
-				{"position": {"row": 1, "col": 2}, "symbolId": "VIP_CARD"}
+				{"position": {"reel": 0, "row": 0}, "symbolId": "DIAMOND_HANDS"},
+				{"position": {"reel": 1, "row": 0}, "symbolId": "DIAMOND_HANDS"},
+				{"position": {"reel": 2, "row": 0}, "symbolId": "DIAMOND_HANDS"},
+				{"position": {"reel": 0, "row": 1}, "symbolId": "COCKTAIL"},
+				{"position": {"reel": 1, "row": 1}, "symbolId": "DISCO_BALL"},
+				{"position": {"reel": 2, "row": 1}, "symbolId": "VIP_CARD"}
 			],
 			"boardAfter": [
 				["DIAMOND_HANDS", "DIAMOND_HANDS", "DIAMOND_HANDS", "DISCO_BALL", "DICE", "HUSTLER"],
@@ -85,9 +85,9 @@
 					"symbolId": "DIAMOND_HANDS",
 					"count": 3,
 					"positions": [
-						{"row": 0, "col": 0},
-						{"row": 0, "col": 1},
-						{"row": 0, "col": 2}
+						{"reel": 0, "row": 0},
+						{"reel": 1, "row": 0},
+						{"reel": 2, "row": 0}
 					],
 					"ways": 8,
 					"baseWin": 100,
