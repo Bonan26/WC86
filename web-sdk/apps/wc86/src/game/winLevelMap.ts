@@ -1,5 +1,3 @@
-import type { WinLevelMap } from 'utils-shared/winLevel';
-
 export type WinLevelAlias = 'big' | 'super' | 'mega' | 'epic' | 'max' | 'none';
 
 export type WinLevelData = {
@@ -14,7 +12,7 @@ export type WinLevelData = {
 };
 
 // Win level thresholds (in multiples of bet)
-export const winLevelMap: WinLevelMap<WinLevelAlias> = {
+export const winLevelMap: Record<WinLevelAlias, { threshold: number }> = {
 	none: { threshold: 0 },
 	big: { threshold: 20 },
 	super: { threshold: 50 },

@@ -99,6 +99,8 @@ export type BookEvent =
 
 export type BookEventOfType<T extends BookEventType> = Extract<BookEvent, { type: T }>;
 
+export type BookEventContext = { bookEvents: BookEvent[] };
+
 export type Bet = {
 	id: string;
 	event: string;

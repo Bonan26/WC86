@@ -3,11 +3,24 @@ import { waitForTimeout } from 'utils-shared/wait';
 import type { BookEventHandlerMap } from 'utils-book';
 
 import { eventEmitter } from './eventEmitter';
-import { stateGame, stateGameDerived, getWinLevelDataByWinLevelAlias } from './stateGame.svelte';
-import type { BookEvent } from './typesBookEvent';
+import { stateGame, stateGameDerived } from './stateGame.svelte';
+import type { BookEvent, BookEventContext, BookEventOfType } from './typesBookEvent';
+import { winLevelMap, winLevelDataMap, type WinLevelAlias } from './winLevelMap';
 
-export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
-	reveal: async ({ data }) => {
+// Helper to get win level alias from multiplier
+const getWinLevelAliasByMultiplier = (multiplier: number): WinLevelAlias => {
+	const levels: WinLevelAlias[] = ['max', 'epic', 'mega', 'super', 'big', 'none'];
+	for (const level of levels) {
+		if (multiplier >= winLevelMap[level].threshold) {
+			return level;
+		}
+	}
+	return 'none';
+};
+
+export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContext> = {
+	reveal: async (bookEvent: BookEventOfType<'reveal'>) => {
+		const { data } = bookEvent;
 		stateGame.gameType = data.gameType;
 		stateGame.currentGrid = data.currentGrid;
 		stateGame.huntMultiplier = data.huntMultiplier;
@@ -29,8 +42,8 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		await waitForTimeout(300);
 	},
 
-	winInfo: async ({ data }) => {
-		const { wins, totalWin, huntMultiplier, chainMultiplier } = data;
+	winInfo: async (bookEvent: BookEventOfType<'winInfo'>) => {
+		const { wins, totalWin, huntMultiplier, chainMultiplier } = bookEvent.data;
 
 		for (const win of wins) {
 			eventEmitter.broadcast({
@@ -41,9 +54,10 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 
 		if (totalWin > 0) {
 			stateBet.winBookEventAmount += totalWin;
-			const winLevelData = getWinLevelDataByWinLevelAlias(
+			const winLevelAlias = getWinLevelAliasByMultiplier(
 				stateBet.winBookEventAmount / stateBet.betAmount
 			);
+			const winLevelData = winLevelDataMap[winLevelAlias];
 
 			eventEmitter.broadcast({ type: 'winShow' });
 			eventEmitter.broadcast({
@@ -56,8 +70,8 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		await waitForTimeout(500);
 	},
 
-	tumbleBoard: async ({ data }) => {
-		const { explodingPositions, newSymbols } = data;
+	tumbleBoard: async (bookEvent: BookEventOfType<'tumbleBoard'>) => {
+		const { explodingPositions, newSymbols } = bookEvent.data;
 
 		// Explode winning symbols
 		for (const pos of explodingPositions) {
@@ -76,7 +90,8 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		await waitForTimeout(400);
 	},
 
-	updateHuntMultiplier: async ({ data }) => {
+	updateHuntMultiplier: async (bookEvent: BookEventOfType<'updateHuntMultiplier'>) => {
+		const { data } = bookEvent;
 		stateGame.huntMultiplier = data.huntMultiplier;
 		stateGame.cascadeCount = data.cascadeCount;
 
@@ -96,10 +111,10 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		await waitForTimeout(300);
 	},
 
-	packSplit: async ({ data }) => {
+	packSplit: async (bookEvent: BookEventOfType<'packSplit'>) => {
 		eventEmitter.broadcast({
 			type: 'packSplitAnimate',
-			data,
+			data: bookEvent.data,
 		});
 
 		eventEmitter.broadcast({
@@ -110,7 +125,8 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		await waitForTimeout(600);
 	},
 
-	howlChain: async ({ data }) => {
+	howlChain: async (bookEvent: BookEventOfType<'howlChain'>) => {
+		const { data } = bookEvent;
 		eventEmitter.broadcast({
 			type: 'howlChainAnimate',
 			data,
@@ -128,7 +144,8 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		await waitForTimeout(500);
 	},
 
-	territoryExpand: async ({ data }) => {
+	territoryExpand: async (bookEvent: BookEventOfType<'territoryExpand'>) => {
+		const { data } = bookEvent;
 		stateGame.currentGrid = data.newGrid;
 		stateGame.territoryCounter = data.territoryCount;
 
@@ -145,7 +162,8 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		await waitForTimeout(800);
 	},
 
-	alphaDominationStart: async ({ data }) => {
+	alphaDominationStart: async (bookEvent: BookEventOfType<'alphaDominationStart'>) => {
+		const { data } = bookEvent;
 		stateGame.gameType = 'alphaDomination';
 		stateGame.currentGrid = '8x8';
 		stateGame.huntMultiplier = data.startingMultiplier;
@@ -163,7 +181,8 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		await waitForTimeout(2000);
 	},
 
-	freeSpinTrigger: async ({ data }) => {
+	freeSpinTrigger: async (bookEvent: BookEventOfType<'freeSpinTrigger'>) => {
+		const { data } = bookEvent;
 		stateGame.gameType = 'freegame';
 		stateGame.freeSpinsTotal = data.totalSpins;
 		stateGame.freeSpinsRemaining = data.totalSpins;
@@ -199,14 +218,14 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		eventEmitter.broadcast({ type: 'transition' });
 	},
 
-	freeSpinEnd: async ({ data }) => {
+	freeSpinEnd: async (bookEvent: BookEventOfType<'freeSpinEnd'>) => {
+		const { data } = bookEvent;
 		stateGame.gameType = 'basegame';
 		stateGame.huntMultiplier = 1;
 		stateGame.cascadeCount = 0;
 
-		const winLevelData = getWinLevelDataByWinLevelAlias(
-			data.totalWin / stateBet.betAmount
-		);
+		const winLevelAlias = getWinLevelAliasByMultiplier(data.totalWin / stateBet.betAmount);
+		const winLevelData = winLevelDataMap[winLevelAlias];
 
 		eventEmitter.broadcast({ type: 'freeSpinOutroShow' });
 		eventEmitter.broadcast({
@@ -223,8 +242,10 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		eventEmitter.broadcast({ type: 'huntMultiplierHide' });
 	},
 
-	setWin: async ({ data }) => {
-		const winLevelData = getWinLevelDataByWinLevelAlias(data.multiplier);
+	setWin: async (bookEvent: BookEventOfType<'setWin'>) => {
+		const { data } = bookEvent;
+		const winLevelAlias = getWinLevelAliasByMultiplier(data.multiplier);
+		const winLevelData = winLevelDataMap[winLevelAlias];
 
 		eventEmitter.broadcast({ type: 'winShow' });
 		eventEmitter.broadcast({
@@ -237,11 +258,12 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		eventEmitter.broadcast({ type: 'winHide' });
 	},
 
-	setTotalWin: async ({ amount }) => {
-		stateBet.winBookEventAmount = amount;
+	setTotalWin: async (bookEvent: BookEventOfType<'setTotalWin'>) => {
+		stateBet.winBookEventAmount = bookEvent.amount;
 	},
 
-	updateFreeSpin: async ({ current, total }) => {
+	updateFreeSpin: async (bookEvent: BookEventOfType<'updateFreeSpin'>) => {
+		const { current, total } = bookEvent;
 		stateGame.freeSpinsRemaining = total - current;
 		stateGame.freeSpinsTotal = total;
 
@@ -253,7 +275,8 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		});
 	},
 
-	updateGlobalMult: async ({ multiplier }) => {
+	updateGlobalMult: async (bookEvent: BookEventOfType<'updateGlobalMult'>) => {
+		const { multiplier } = bookEvent;
 		stateGame.huntMultiplier = multiplier;
 		eventEmitter.broadcast({
 			type: 'huntMultiplierUpdate',
@@ -263,7 +286,8 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent> = {
 		});
 	},
 
-	createBonusSnapshot: async ({ bookEvents }) => {
+	createBonusSnapshot: async (bookEvent: BookEventOfType<'createBonusSnapshot'>) => {
+		const { bookEvents } = bookEvent;
 		// Process snapshot events to restore state
 		for (const event of bookEvents) {
 			if (event.type === 'updateGlobalMult') {

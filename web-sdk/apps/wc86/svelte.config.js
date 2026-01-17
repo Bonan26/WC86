@@ -1,3 +1,3 @@
-import config from 'config-svelte';
+import createConfig from 'config-svelte';
 
-export default config;
+export default createConfig();

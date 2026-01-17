@@ -1,3 +1,3 @@
-import { createXstateUtils } from 'utils-xstate';
+import { createXstate } from 'utils-xstate';
 
-export const { stateXstate, stateXstateDerived } = createXstateUtils();
+export const { stateXstate, stateXstateDerived } = createXstate();
