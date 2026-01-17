@@ -76,7 +76,7 @@
 					fontSize,
 					wordWrap: false,
 				}}
-				onresize={(sizes) => (titleSizes = sizes)}
+				onresize={(sizes: Sizes) => (titleSizes = sizes)}
 			/>
 			<BitmapText
 				text={`${current} OF ${total}`}
@@ -86,7 +86,7 @@
 					fontFamily: 'gold',
 					fontSize,
 				}}
-				onresize={(sizes) => (counterSizes = sizes)}
+				onresize={(sizes: Sizes) => (counterSizes = sizes)}
 			/>
 		</Container>
 	</FadeContainer>

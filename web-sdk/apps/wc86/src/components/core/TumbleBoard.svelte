@@ -98,16 +98,17 @@
 
 <Container bind:instance={containerRef} x={0} y={0}>
 	<!-- Board frame/border -->
-	<BoardFrame {width} {height} />
+	<BoardFrame />
 
-	<!-- Masked board content -->
-	<BoardMask {width} {height}>
-		<TumbleBoardBase
-			symbols={boardSymbols}
-			gridSize={currentGridSize}
-			{width}
-			{height}
-			onSymbolTumbleComplete={handleSymbolTumbleComplete}
-		/>
-	</BoardMask>
+	<!-- Board mask -->
+	<BoardMask />
+
+	<!-- Board content -->
+	<TumbleBoardBase
+		symbols={boardSymbols}
+		gridSize={currentGridSize}
+		{width}
+		{height}
+		onSymbolTumbleComplete={handleSymbolTumbleComplete}
+	/>
 </Container>

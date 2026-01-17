@@ -12,7 +12,7 @@
 
 	import { getContext } from '../../game/context';
 	import { SYMBOL_SIZE, GRID_CONFIGS } from '../../game/constants';
-	import type { TerritoryExpandData, GridSize } from '../../game/types';
+	import type { GridSize } from '../../game/types';
 
 	const context = getContext();
 

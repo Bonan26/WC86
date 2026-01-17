@@ -15,7 +15,6 @@
 	import { getContext } from '../../game/context';
 	import { SYMBOL_SIZE, GRID_CONFIGS } from '../../game/constants';
 	import PressToContinue from '../core/PressToContinue.svelte';
-	import type { AlphaDominationStartData } from '../../game/typesBookEvent';
 
 	const context = getContext();
 

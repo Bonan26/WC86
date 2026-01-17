@@ -44,7 +44,7 @@
 			{animationName}
 			{loop}
 			listener={{
-				complete: (entry) => {
+				complete: (entry: { animation?: { name: string } }) => {
 					if (entry.animation) {
 						if (entry.animation.name === 'reelhouse_glow_start') {
 							animationName = 'reelhouse_glow_idle';

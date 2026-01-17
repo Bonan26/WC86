@@ -26,7 +26,7 @@
 		<SpineTrack
 			loop={props.loop}
 			trackIndex={0}
-			animationName={props.symbolInfo.animationName}
+			animationName={'animationName' in props.symbolInfo ? props.symbolInfo.animationName : 'idle'}
 			timeScale={stateBetDerived.timeScale()}
 			listener={props.listener}
 		/>

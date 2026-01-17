@@ -15,7 +15,9 @@
 	const props: Props = $props();
 	const context = getContext();
 	const extraConfig = $derived(
-		props?.levelAlias ? LEVEL_PARTICLE_COIN_MAP[props.levelAlias] : null,
+		props?.levelAlias && props.levelAlias !== 'none'
+			? LEVEL_PARTICLE_COIN_MAP[props.levelAlias as keyof typeof LEVEL_PARTICLE_COIN_MAP]
+			: null,
 	);
 	const config = $derived({ ...baseConfig, ...extraConfig });
 </script>

@@ -15,7 +15,7 @@
 	import { getContext } from '../../game/context';
 	import { SYMBOL_SIZE, REEL_PADDING } from '../../game/constants';
 	import { getSymbolX, getSymbolY } from '../../game/utils';
-	import type { HowlChainData, Position } from '../../game/types';
+	import type { Position } from '../../game/types';
 
 	const context = getContext();
 

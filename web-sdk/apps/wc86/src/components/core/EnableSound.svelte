@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { stateSound } from 'state-shared';
 
 	// Enable sound system on mount
 	onMount(() => {
-		// Sound system initialization would happen here
-		stateSound.enabled = true;
+		// Sound system initialization is handled by the SDK
+		// This component can be extended for game-specific sound setup
 	});
 </script>

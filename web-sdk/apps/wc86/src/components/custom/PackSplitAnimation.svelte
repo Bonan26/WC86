@@ -15,7 +15,6 @@
 	import { getContext } from '../../game/context';
 	import { SYMBOL_SIZE } from '../../game/constants';
 	import { getSymbolX, getSymbolY } from '../../game/utils';
-	import type { PackSplitData } from '../../game/types';
 
 	const context = getContext();
 
