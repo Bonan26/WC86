@@ -2,7 +2,8 @@
 	import { Container, Sprite } from 'pixi-svelte';
 	import type { Container as PixiContainer } from 'pixi.js';
 	import type { SymbolId } from '../../game/types';
-	import { SYMBOL_INFO_MAP } from '../../game/constants';
+	import { SYMBOL_INFO_MAP, SYMBOL_SIZE } from '../../game/constants';
+	import { getSymbolInfo } from '../../game/utils';
 	import SymbolSpine from './SymbolSpine.svelte';
 
 	// Position with row/col for grid layout
@@ -34,7 +35,14 @@
 	let containerRef: PixiContainer | null = $state(null);
 	let tumbleProgress = $state(0);
 
-	const symbolInfo = $derived(SYMBOL_INFO_MAP[symbolId]);
+	// Get the current state for the symbol
+	const currentState = $derived(isWinning ? 'win' : 'static');
+	const symbolInfoForState = $derived(getSymbolInfo({
+		rawSymbol: { name: symbolId },
+		state: currentState
+	}));
+	const isSpineSymbol = $derived(symbolInfoForState?.type === 'spine');
+
 	const x = $derived(position.col * cellWidth + cellWidth / 2);
 	const y = $derived(position.row * cellHeight + cellHeight / 2);
 
@@ -88,16 +96,17 @@
 	y={isTumbling ? y - cellHeight * 2 : y}
 	alpha={1}
 >
-	{#if symbolInfo?.hasSpine}
+	{#if isSpineSymbol && symbolInfoForState}
 		<SymbolSpine
-			{symbolId}
-			width={cellWidth * 0.9}
-			height={cellHeight * 0.9}
-			animation={isWinning ? 'win' : 'idle'}
+			symbolInfo={symbolInfoForState}
+			showWinFrame={isWinning}
+			listener={{
+				complete: onTumbleComplete,
+			}}
 		/>
-	{:else}
+	{:else if symbolInfoForState}
 		<Sprite
-			texture={symbolInfo?.texture ?? ''}
+			key={symbolInfoForState.assetKey}
 			anchor={{ x: 0.5, y: 0.5 }}
 			width={cellWidth * 0.9}
 			height={cellHeight * 0.9}
