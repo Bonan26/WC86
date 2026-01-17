@@ -48,7 +48,7 @@
 	});
 
 	// Calculate alpha wolf position on screen
-	const alphaPosition = $derived(() => {
+	const alphaPosition = $derived.by(() => {
 		if (!splitData) return { x: 0, y: 0 };
 
 		return {
@@ -66,7 +66,7 @@
 	<FadeContainer show={visible}>
 		{#if splitData}
 			<!-- Alpha Wolf Split Animation -->
-			<Container {...alphaPosition()}>
+			<Container {...alphaPosition}>
 				<SpineProvider key="alpha_wolf" width={SYMBOL_SIZE * 1.2}>
 					<SpineTrack
 						trackIndex={0}

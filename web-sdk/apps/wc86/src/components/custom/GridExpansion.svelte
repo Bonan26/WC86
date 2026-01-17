@@ -21,7 +21,7 @@
 	let animationPhase = $state<'intro' | 'expand' | 'complete'>('intro');
 
 	// Animation name based on the new grid size
-	const animationName = $derived(() => {
+	const animationName = $derived.by(() => {
 		if (!expandData) return 'expand_7x6';
 		return `expand_${expandData.newGrid.replace('x', 'x')}`;
 	});
@@ -62,7 +62,7 @@
 			<SpineProvider key="territoryExpand" width={context.stateGameDerived.boardLayout().width * 1.2}>
 				<SpineTrack
 					trackIndex={0}
-					animationName={animationName()}
+					animationName={animationName}
 					loop={false}
 				/>
 			</SpineProvider>

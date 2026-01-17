@@ -23,14 +23,14 @@
 
 	// Calculate progress to next expansion
 	const thresholds = [3, 6, 10];
-	const nextThreshold = $derived(() => {
+	const nextThreshold = $derived.by(() => {
 		for (const t of thresholds) {
 			if (territoryCount < t) return t;
 		}
 		return 10; // Max
 	});
 
-	const progress = $derived(() => {
+	const progress = $derived.by(() => {
 		const prevThreshold = thresholds.find((t, i) => {
 			const prev = i === 0 ? 0 : thresholds[i - 1];
 			return territoryCount >= prev && territoryCount < t;
@@ -41,8 +41,8 @@
 	});
 
 	const currentGrid = $derived(context.stateGame.currentGrid);
-	const nextGrid = $derived(() => {
-		const next = nextThreshold();
+	const nextGrid = $derived.by(() => {
+		const next = nextThreshold;
 		return TERRITORY_THRESHOLDS[next as keyof typeof TERRITORY_THRESHOLDS] || currentGrid;
 	});
 
@@ -85,9 +85,9 @@
 
 			<!-- Progress bar fill -->
 			<Rectangle
-				y={PROGRESS_BAR_HEIGHT * (1 - progress())}
+				y={PROGRESS_BAR_HEIGHT * (1 - progress)}
 				width={PROGRESS_BAR_WIDTH}
-				height={PROGRESS_BAR_HEIGHT * progress()}
+				height={PROGRESS_BAR_HEIGHT * progress}
 				backgroundColor={0x7b2cbf}
 			/>
 
@@ -114,7 +114,7 @@
 				anchor={{ x: 0.5, y: 0 }}
 				x={PROGRESS_BAR_WIDTH / 2}
 				y={PROGRESS_BAR_HEIGHT + SYMBOL_SIZE * 0.1}
-				text={`${territoryCount}/${nextThreshold()}`}
+				text={`${territoryCount}/${nextThreshold}`}
 				style={{
 					fontFamily: 'gold',
 					fontSize: SYMBOL_SIZE * 0.2,
@@ -126,7 +126,7 @@
 				anchor={{ x: 0.5, y: 0 }}
 				x={PROGRESS_BAR_WIDTH / 2}
 				y={PROGRESS_BAR_HEIGHT + SYMBOL_SIZE * 0.35}
-				text={nextGrid()}
+				text={nextGrid}
 				style={{
 					fontFamily: 'gold',
 					fontSize: SYMBOL_SIZE * 0.15,

@@ -31,14 +31,14 @@
 	let winningPositions = $state<Set<string>>(new Set());
 
 	// Current grid size based on expansion level
-	const currentGridSize = $derived<GridSizeConfig>(() => {
+	const currentGridSize = $derived.by((): GridSizeConfig => {
 		const gridKey = gameState?.current?.currentGrid ?? '6x5';
 		const config = GRID_CONFIGS[gridKey];
 		return { rows: config.rows, cols: config.reels };
 	});
 
 	// Transform board data into symbol array
-	const boardSymbols = $derived(() => {
+	const boardSymbols = $derived.by(() => {
 		const board = gameState?.current?.board ?? [];
 		const symbols: Array<{
 			id: string;
@@ -103,8 +103,8 @@
 	<!-- Masked board content -->
 	<BoardMask {width} {height}>
 		<TumbleBoardBase
-			symbols={boardSymbols()}
-			gridSize={currentGridSize()}
+			symbols={boardSymbols}
+			gridSize={currentGridSize}
 			{width}
 			{height}
 			onSymbolTumbleComplete={handleSymbolTumbleComplete}

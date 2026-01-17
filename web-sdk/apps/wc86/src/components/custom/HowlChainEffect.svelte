@@ -42,7 +42,7 @@
 	});
 
 	// Calculate position for the chain multiplier display
-	const chainPosition = $derived(() => {
+	const chainPosition = $derived.by(() => {
 		if (!chainData || chainData.wildPositions.length === 0) {
 			return { x: 0, y: 0 };
 		}
@@ -99,7 +99,7 @@
 			</Container>
 
 			<!-- Chain multiplier result -->
-			<Container {...chainPosition()}>
+			<Container {...chainPosition}>
 				<SpineProvider key="howlChainResult" width={SYMBOL_SIZE * 2}>
 					<SpineTrack
 						trackIndex={0}
