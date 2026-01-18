@@ -1,0 +1,94 @@
+{
+  "name": "alphaDomination",
+  "description": "Super bonus mode animations",
+  "animations": {
+    "intro": {
+      "type": "dramatic_intro",
+      "duration": 2000,
+      "loop": false,
+      "keyframes": [
+        {
+          "time": 0,
+          "opacity": 0,
+          "scale": 2.0,
+          "blur": 20
+        },
+        {
+          "time": 0.2,
+          "opacity": 0.5,
+          "scale": 1.5,
+          "blur": 10,
+          "flash": true
+        },
+        {
+          "time": 0.4,
+          "opacity": 1,
+          "scale": 1.2,
+          "blur": 5,
+          "shake": 10
+        },
+        {
+          "time": 0.6,
+          "scale": 1.0,
+          "blur": 0
+        },
+        {
+          "time": 0.8,
+          "fire_intensity": 0.5
+        },
+        {
+          "time": 1.0,
+          "fire_intensity": 1.0,
+          "glow": 15
+        }
+      ],
+      "background": "bg_alpha_domination"
+    },
+    "idle": {
+      "type": "fire_ambient",
+      "duration": 3000,
+      "loop": true,
+      "keyframes": [
+        {
+          "time": 0,
+          "fire_intensity": 0.8,
+          "glow": 10
+        },
+        {
+          "time": 0.5,
+          "fire_intensity": 1.0,
+          "glow": 15
+        },
+        {
+          "time": 1.0,
+          "fire_intensity": 0.8,
+          "glow": 10
+        }
+      ]
+    },
+    "outro": {
+      "type": "fade_out",
+      "duration": 1500,
+      "loop": false,
+      "keyframes": [
+        {
+          "time": 0,
+          "opacity": 1,
+          "fire_intensity": 1.0
+        },
+        {
+          "time": 0.5,
+          "opacity": 0.7,
+          "fire_intensity": 0.5,
+          "blur": 5
+        },
+        {
+          "time": 1.0,
+          "opacity": 0,
+          "fire_intensity": 0,
+          "blur": 15
+        }
+      ]
+    }
+  }
+}

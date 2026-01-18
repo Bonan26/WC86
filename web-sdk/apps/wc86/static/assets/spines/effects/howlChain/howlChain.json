@@ -1,0 +1,81 @@
+{
+  "name": "howlChain",
+  "description": "Lines connecting wild symbols",
+  "animations": {
+    "chain_2": {
+      "type": "chain_connect",
+      "duration": 500,
+      "loop": false,
+      "keyframes": [
+        {
+          "time": 0,
+          "opacity": 0,
+          "line_width": 0
+        },
+        {
+          "time": 0.3,
+          "opacity": 1,
+          "line_width": 5,
+          "glow": 10
+        },
+        {
+          "time": 1.0,
+          "opacity": 1,
+          "line_width": 3,
+          "glow": 5
+        }
+      ],
+      "effect": "additive_multiplier"
+    },
+    "chain_3plus": {
+      "type": "chain_connect",
+      "duration": 700,
+      "loop": false,
+      "keyframes": [
+        {
+          "time": 0,
+          "opacity": 0,
+          "line_width": 0
+        },
+        {
+          "time": 0.2,
+          "opacity": 1,
+          "line_width": 8,
+          "glow": 20
+        },
+        {
+          "time": 0.5,
+          "opacity": 1,
+          "line_width": 6,
+          "glow": 15,
+          "flash": true
+        },
+        {
+          "time": 1.0,
+          "opacity": 1,
+          "line_width": 4,
+          "glow": 10
+        }
+      ],
+      "effect": "multiplicative_multiplier"
+    },
+    "connection": {
+      "type": "particle_line",
+      "duration": 300,
+      "loop": true,
+      "keyframes": [
+        {
+          "time": 0,
+          "particle_count": 5,
+          "speed": 100
+        },
+        {
+          "time": 1.0,
+          "particle_count": 5,
+          "speed": 100
+        }
+      ],
+      "color": "#FFD700"
+    }
+  }
+}
