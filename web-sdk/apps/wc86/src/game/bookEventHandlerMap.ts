@@ -1,306 +1,389 @@
-import { stateBet } from 'state-shared';
-import { waitForTimeout } from 'utils-shared/wait';
-import type { BookEventHandlerMap } from 'utils-book';
+/**
+ * WC86 - Wolf Club 86 - Book Event Handler Map
+ * Handlers pour les events recus du Math SDK (DAN)
+ * Emet des Emitter Events pour les animations (STEPH)
+ */
 
-import { eventEmitter } from './eventEmitter';
-import { stateGame, stateGameDerived } from './stateGame.svelte';
-import type { BookEvent, BookEventContext, BookEventOfType } from './typesBookEvent';
-import { winLevelMap, winLevelDataMap, type WinLevelAlias } from './winLevelMap';
+import {
+  stateGame,
+  updateBoard,
+  setGameType,
+  setCurrentGrid,
+  updateHuntMultiplier,
+  updateFreeSpins,
+  updateTotalWin,
+  updateSpinWin,
+  setWinLevel,
+  startAlphaDomination,
+  endAlphaDomination,
+  setSpinning,
+  setCascading,
+  setFeatureActive,
+  updateTerritoryCollected,
+} from './stateGame.svelte';
 
-// Helper to get win level alias from multiplier
-const getWinLevelAliasByMultiplier = (multiplier: number): WinLevelAlias => {
-	const levels: WinLevelAlias[] = ['max', 'epic', 'mega', 'super', 'big', 'none'];
-	for (const level of levels) {
-		if (multiplier >= winLevelMap[level].threshold) {
-			return level;
-		}
-	}
-	return 'none';
+import type {
+  BookEventHandlerMap,
+  GameContext,
+  RevealData,
+  WinInfoData,
+  TumbleBoardData,
+  UpdateHuntMultiplierData,
+  PackSplitData,
+  HowlChainData,
+  TerritoryExpandData,
+  AlphaDominationStartData,
+  FreeSpinTriggerData,
+  FreeSpinEndData,
+  SetWinData,
+} from './typesBookEvent';
+
+// ============================================================================
+// Handler: reveal
+// Affichage du board initial apres un spin
+// ============================================================================
+
+async function handleReveal(data: RevealData, ctx: GameContext): Promise<void> {
+  // Update state
+  updateBoard(data.board);
+  setGameType(data.gameType);
+  setCurrentGrid(data.currentGrid);
+  updateHuntMultiplier(data.huntMultiplier, 0);
+  updateTerritoryCollected(data.territoryCollected);
+
+  // Emit board reveal
+  await ctx.eventEmitter.emit('boardReveal');
+
+  // Reveal via enhanced board
+  await ctx.enhancedBoard.reveal();
+
+  // Stop spinning state
+  setSpinning(false);
+}
+
+// ============================================================================
+// Handler: winInfo
+// Information sur les gains d'un spin/cascade
+// ============================================================================
+
+async function handleWinInfo(data: WinInfoData, ctx: GameContext): Promise<void> {
+  // Update state
+  updateSpinWin(data.totalWin);
+  updateTotalWin(stateGame.totalWin + data.totalWin);
+
+  // Show hunt multiplier si > 1
+  if (data.huntMultiplier > 1) {
+    await ctx.eventEmitter.emit('huntMultiplierShow');
+  }
+
+  // Animate each win
+  for (const win of data.wins) {
+    await ctx.eventEmitter.emit('symbolWin', {
+      positions: win.positions,
+    });
+  }
+}
+
+// ============================================================================
+// Handler: tumbleBoard
+// Cascade apres un gain - symboles explosent et nouveaux tombent
+// ============================================================================
+
+async function handleTumbleBoard(data: TumbleBoardData, ctx: GameContext): Promise<void> {
+  // Set cascading state
+  setCascading(true);
+
+  // Emit explosion animation
+  await ctx.eventEmitter.emit('symbolExplode', {
+    positions: data.explodingPositions,
+  });
+
+  // Tumble via enhanced board (nouveaux symboles tombent)
+  await ctx.enhancedBoard.tumble(data.newSymbols);
+
+  // Update board state avec nouveaux symboles
+  const newBoard = [...stateGame.board.map((reel) => [...reel])];
+  for (const { reel, row, symbol } of data.newSymbols) {
+    if (newBoard[reel] && newBoard[reel][row] !== undefined) {
+      newBoard[reel][row] = symbol;
+    }
+  }
+  updateBoard(newBoard);
+}
+
+// ============================================================================
+// Handler: updateHuntMultiplier
+// Mise a jour du multiplicateur de chasse apres cascade
+// ============================================================================
+
+async function handleUpdateHuntMultiplier(
+  data: UpdateHuntMultiplierData,
+  ctx: GameContext
+): Promise<void> {
+  // Update state
+  updateHuntMultiplier(data.huntMultiplier, data.cascadeCount);
+  stateGame.multCap = data.multCap;
+
+  // Emit update animation
+  await ctx.eventEmitter.emit('huntMultiplierUpdate', {
+    value: data.huntMultiplier,
+    cascadeCount: data.cascadeCount,
+  });
+}
+
+// ============================================================================
+// Handler: packSplit
+// Alpha Wolf se duplique sur les positions adjacentes
+// ============================================================================
+
+async function handlePackSplit(data: PackSplitData, ctx: GameContext): Promise<void> {
+  // Set feature active
+  setFeatureActive(true);
+
+  // Emit pack split animation
+  await ctx.eventEmitter.emit('packSplitAnimate', data);
+
+  // Update board - les positions affectees deviennent des ALPHA_WOLF
+  const newBoard = [...stateGame.board.map((reel) => [...reel])];
+  for (const pos of data.affectedPositions) {
+    if (newBoard[pos.reel] && newBoard[pos.reel][pos.row] !== undefined) {
+      newBoard[pos.reel][pos.row] = {
+        name: 'ALPHA_WOLF',
+        wild: true,
+      };
+    }
+  }
+  updateBoard(newBoard);
+
+  setFeatureActive(false);
+}
+
+// ============================================================================
+// Handler: howlChain
+// Wilds adjacents forment une chaine avec multiplicateur
+// ============================================================================
+
+async function handleHowlChain(data: HowlChainData, ctx: GameContext): Promise<void> {
+  // Set feature active
+  setFeatureActive(true);
+
+  // Emit howl chain animation
+  await ctx.eventEmitter.emit('howlChainAnimate', data);
+
+  // Update board - mettre a jour les multiplicateurs des wilds
+  const newBoard = [...stateGame.board.map((reel) => [...reel])];
+  for (const wildPos of data.wildPositions) {
+    if (newBoard[wildPos.reel] && newBoard[wildPos.reel][wildPos.row] !== undefined) {
+      const currentSymbol = newBoard[wildPos.reel][wildPos.row];
+      newBoard[wildPos.reel][wildPos.row] = {
+        ...currentSymbol,
+        multiplier: wildPos.multiplier,
+      };
+    }
+  }
+  updateBoard(newBoard);
+
+  setFeatureActive(false);
+}
+
+// ============================================================================
+// Handler: territoryExpand
+// Expansion de la grille quand assez de TERRITORY collectes
+// ============================================================================
+
+async function handleTerritoryExpand(data: TerritoryExpandData, ctx: GameContext): Promise<void> {
+  // Set feature active
+  setFeatureActive(true);
+
+  // Emit grid expand animation
+  await ctx.eventEmitter.emit('gridExpand', data);
+
+  // Update state
+  setCurrentGrid(data.newGrid);
+  updateTerritoryCollected(data.territoryCount);
+
+  // Creer nouveau board avec la nouvelle taille
+  const [reels, rows] = data.newGrid.split('x').map(Number);
+  const newBoard: typeof stateGame.board = Array.from({ length: reels }, (_, reelIdx) =>
+    Array.from({ length: rows }, (_, rowIdx) => {
+      // Conserver les symboles existants si possible
+      if (stateGame.board[reelIdx] && stateGame.board[reelIdx][rowIdx]) {
+        return stateGame.board[reelIdx][rowIdx];
+      }
+      // Sinon placeholder (sera remplace par le prochain reveal)
+      return { name: 'COCKTAIL' as const };
+    })
+  );
+  updateBoard(newBoard);
+
+  setFeatureActive(false);
+}
+
+// ============================================================================
+// Handler: alphaDominationStart
+// Debut du super bonus Alpha Domination
+// ============================================================================
+
+async function handleAlphaDominationStart(
+  data: AlphaDominationStartData,
+  ctx: GameContext
+): Promise<void> {
+  // Set feature active
+  setFeatureActive(true);
+
+  // Update state
+  startAlphaDomination(data.startingMultiplier, data.multCap);
+
+  // Emit intro animation
+  await ctx.eventEmitter.emit('alphaDominationIntroShow', data);
+
+  setFeatureActive(false);
+}
+
+// ============================================================================
+// Handler: freeSpinTrigger
+// Declenchement des Free Spins
+// ============================================================================
+
+async function handleFreeSpinTrigger(data: FreeSpinTriggerData, ctx: GameContext): Promise<void> {
+  // Set feature active
+  setFeatureActive(true);
+
+  // Update free spins state
+  if (data.isRetrigger) {
+    const newRemaining = stateGame.freeSpinsRemaining + data.totalSpins;
+    updateFreeSpins(newRemaining);
+
+    // Emit counter update for retrigger
+    await ctx.eventEmitter.emit('freeSpinCounterUpdate', {
+      remaining: newRemaining,
+      total: stateGame.freeSpinsTotal + data.totalSpins,
+    });
+  } else {
+    updateFreeSpins(data.totalSpins, data.totalSpins);
+    setGameType('freegame');
+
+    // Emit intro animation
+    await ctx.eventEmitter.emit('freeSpinIntroShow', {
+      scatterCount: data.scatterCount,
+      totalSpins: data.totalSpins,
+    });
+  }
+
+  setFeatureActive(false);
+}
+
+// ============================================================================
+// Handler: freeSpinEnd
+// Fin des Free Spins
+// ============================================================================
+
+async function handleFreeSpinEnd(data: FreeSpinEndData, ctx: GameContext): Promise<void> {
+  // Set feature active
+  setFeatureActive(true);
+
+  // Update state
+  updateFreeSpins(0, 0);
+  setWinLevel(data.winLevel);
+
+  // Emit outro animation
+  await ctx.eventEmitter.emit('freeSpinOutroShow', {
+    totalWin: data.totalWin,
+    spinCount: data.spinCount,
+    maxMultiplierReached: data.maxMultiplierReached,
+    winLevel: data.winLevel,
+  });
+
+  // Reset game state for base game
+  setGameType('basegame');
+  endAlphaDomination();
+  updateHuntMultiplier(1, 0);
+
+  setFeatureActive(false);
+}
+
+// ============================================================================
+// Handler: setWin
+// Big win celebration
+// ============================================================================
+
+async function handleSetWin(data: SetWinData, ctx: GameContext): Promise<void> {
+  // Update state
+  setWinLevel(data.winLevel);
+
+  // Emit big win animation
+  await ctx.eventEmitter.emit('bigWinShow', {
+    amount: data.amount,
+    level: data.winLevel,
+  });
+
+  // Wait for celebration to complete then hide
+  await ctx.eventEmitter.emit('bigWinHide');
+
+  // Reset win level
+  setWinLevel('none');
+}
+
+// ============================================================================
+// Export Handler Map
+// ============================================================================
+
+export const bookEventHandlerMap: BookEventHandlerMap = {
+  reveal: handleReveal,
+  winInfo: handleWinInfo,
+  tumbleBoard: handleTumbleBoard,
+  updateHuntMultiplier: handleUpdateHuntMultiplier,
+  packSplit: handlePackSplit,
+  howlChain: handleHowlChain,
+  territoryExpand: handleTerritoryExpand,
+  alphaDominationStart: handleAlphaDominationStart,
+  freeSpinTrigger: handleFreeSpinTrigger,
+  freeSpinEnd: handleFreeSpinEnd,
+  setWin: handleSetWin,
 };
 
-export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContext> = {
-	reveal: async (bookEvent: BookEventOfType<'reveal'>) => {
-		const { data } = bookEvent;
-		stateGame.gameType = data.gameType;
-		stateGame.currentGrid = data.currentGrid;
-		stateGame.huntMultiplier = data.huntMultiplier;
-		stateGame.territoryCounter = data.territoryCollected;
+// ============================================================================
+// Book Event Processor
+// ============================================================================
 
-		eventEmitter.broadcast({ type: 'boardSettle', board: data.board });
-		eventEmitter.broadcast({ type: 'boardShow' });
+/**
+ * Process un Book Event en appelant le handler correspondant
+ */
+export async function processBookEvent(
+  event: { type: string; data: unknown },
+  ctx: GameContext
+): Promise<void> {
+  const handler = bookEventHandlerMap[event.type as keyof BookEventHandlerMap];
 
-		if (data.huntMultiplier > 1) {
-			eventEmitter.broadcast({ type: 'huntMultiplierShow' });
-			eventEmitter.broadcast({
-				type: 'huntMultiplierUpdate',
-				huntMultiplier: data.huntMultiplier,
-				cascadeCount: 0,
-				multCap: 50,
-			});
-		}
+  if (!handler) {
+    console.warn(`[WC86] Unknown book event type: ${event.type}`);
+    return;
+  }
 
-		await waitForTimeout(300);
-	},
+  try {
+    await handler(event.data as never, ctx);
+  } catch (error) {
+    console.error(`[WC86] Error processing book event "${event.type}":`, error);
+    throw error;
+  }
+}
 
-	winInfo: async (bookEvent: BookEventOfType<'winInfo'>) => {
-		const { wins, totalWin, huntMultiplier, chainMultiplier } = bookEvent.data;
+/**
+ * Process une sequence de Book Events
+ */
+export async function processBookEvents(
+  events: Array<{ type: string; data: unknown }>,
+  ctx: GameContext
+): Promise<void> {
+  for (const event of events) {
+    await processBookEvent(event, ctx);
+  }
 
-		for (const win of wins) {
-			eventEmitter.broadcast({
-				type: 'boardWithAnimateSymbols',
-				symbolPositions: win.positions,
-			});
-		}
+  // Cacher le hunt multiplier a la fin si pas de cascades en cours
+  if (!stateGame.isCascading && stateGame.huntMultiplier > 1) {
+    await ctx.eventEmitter.emit('huntMultiplierHide');
+  }
 
-		if (totalWin > 0) {
-			stateBet.winBookEventAmount += totalWin;
-			const winLevelAlias = getWinLevelAliasByMultiplier(
-				stateBet.winBookEventAmount / stateBet.betAmount
-			);
-			const winLevelData = winLevelDataMap[winLevelAlias];
-
-			eventEmitter.broadcast({ type: 'winShow' });
-			eventEmitter.broadcast({
-				type: 'winUpdate',
-				amount: stateBet.winBookEventAmount,
-				winLevelData,
-			});
-		}
-
-		await waitForTimeout(500);
-	},
-
-	tumbleBoard: async (bookEvent: BookEventOfType<'tumbleBoard'>) => {
-		const { explodingPositions, newSymbols } = bookEvent.data;
-
-		// Explode winning symbols
-		for (const pos of explodingPositions) {
-			eventEmitter.broadcast({
-				type: 'symbolExplode',
-				position: pos,
-			});
-		}
-
-		await waitForTimeout(300);
-
-		// Cascade new symbols
-		stateGame.cascadeCount++;
-		eventEmitter.broadcast({ type: 'boardCascade', newSymbols });
-
-		await waitForTimeout(400);
-	},
-
-	updateHuntMultiplier: async (bookEvent: BookEventOfType<'updateHuntMultiplier'>) => {
-		const { data } = bookEvent;
-		stateGame.huntMultiplier = data.huntMultiplier;
-		stateGame.cascadeCount = data.cascadeCount;
-
-		eventEmitter.broadcast({ type: 'huntMultiplierShow' });
-		eventEmitter.broadcast({
-			type: 'huntMultiplierUpdate',
-			huntMultiplier: data.huntMultiplier,
-			cascadeCount: data.cascadeCount,
-			multCap: data.multCap,
-		});
-
-		eventEmitter.broadcast({
-			type: 'soundOnce',
-			name: 'sfx_multiplier_increase',
-		});
-
-		await waitForTimeout(300);
-	},
-
-	packSplit: async (bookEvent: BookEventOfType<'packSplit'>) => {
-		eventEmitter.broadcast({
-			type: 'packSplitAnimate',
-			data: bookEvent.data,
-		});
-
-		eventEmitter.broadcast({
-			type: 'soundOnce',
-			name: 'sfx_pack_split',
-		});
-
-		await waitForTimeout(600);
-	},
-
-	howlChain: async (bookEvent: BookEventOfType<'howlChain'>) => {
-		const { data } = bookEvent;
-		eventEmitter.broadcast({
-			type: 'howlChainAnimate',
-			data,
-		});
-
-		const soundName = data.chainType === 'additive'
-			? 'sfx_howl_chain_add'
-			: 'sfx_howl_chain_multi';
-
-		eventEmitter.broadcast({
-			type: 'soundOnce',
-			name: soundName,
-		});
-
-		await waitForTimeout(500);
-	},
-
-	territoryExpand: async (bookEvent: BookEventOfType<'territoryExpand'>) => {
-		const { data } = bookEvent;
-		stateGame.currentGrid = data.newGrid;
-		stateGame.territoryCounter = data.territoryCount;
-
-		eventEmitter.broadcast({
-			type: 'gridExpand',
-			data,
-		});
-
-		eventEmitter.broadcast({
-			type: 'soundOnce',
-			name: 'sfx_territory_expand',
-		});
-
-		await waitForTimeout(800);
-	},
-
-	alphaDominationStart: async (bookEvent: BookEventOfType<'alphaDominationStart'>) => {
-		const { data } = bookEvent;
-		stateGame.gameType = 'alphaDomination';
-		stateGame.currentGrid = '8x8';
-		stateGame.huntMultiplier = data.startingMultiplier;
-
-		eventEmitter.broadcast({
-			type: 'alphaDominationIntroShow',
-			data,
-		});
-
-		eventEmitter.broadcast({
-			type: 'soundOnce',
-			name: 'sfx_alpha_domination_intro',
-		});
-
-		await waitForTimeout(2000);
-	},
-
-	freeSpinTrigger: async (bookEvent: BookEventOfType<'freeSpinTrigger'>) => {
-		const { data } = bookEvent;
-		stateGame.gameType = 'freegame';
-		stateGame.freeSpinsTotal = data.totalSpins;
-		stateGame.freeSpinsRemaining = data.totalSpins;
-
-		// Animate scatter positions
-		for (const pos of data.scatterPositions) {
-			eventEmitter.broadcast({
-				type: 'symbolWin',
-				position: pos,
-			});
-		}
-
-		eventEmitter.broadcast({ type: 'freeSpinIntroShow' });
-		eventEmitter.broadcast({
-			type: 'freeSpinIntroUpdate',
-			totalFreeSpins: data.totalSpins,
-		});
-
-		if (data.isRetrigger) {
-			eventEmitter.broadcast({
-				type: 'soundOnce',
-				name: 'sfx_freespin_retrigger',
-			});
-		} else {
-			eventEmitter.broadcast({
-				type: 'soundOnce',
-				name: 'sfx_freespin_trigger',
-			});
-		}
-
-		await waitForTimeout(1500);
-		eventEmitter.broadcast({ type: 'freeSpinIntroHide' });
-		eventEmitter.broadcast({ type: 'transition' });
-	},
-
-	freeSpinEnd: async (bookEvent: BookEventOfType<'freeSpinEnd'>) => {
-		const { data } = bookEvent;
-		stateGame.gameType = 'basegame';
-		stateGame.huntMultiplier = 1;
-		stateGame.cascadeCount = 0;
-
-		const winLevelAlias = getWinLevelAliasByMultiplier(data.totalWin / stateBet.betAmount);
-		const winLevelData = winLevelDataMap[winLevelAlias];
-
-		eventEmitter.broadcast({ type: 'freeSpinOutroShow' });
-		eventEmitter.broadcast({
-			type: 'freeSpinOutroCountUp',
-			amount: data.totalWin,
-			winLevelData,
-		});
-
-		await waitForTimeout(winLevelData.presentDuration);
-		eventEmitter.broadcast({ type: 'freeSpinOutroHide' });
-		eventEmitter.broadcast({ type: 'transition' });
-
-		// Reset hunt multiplier display
-		eventEmitter.broadcast({ type: 'huntMultiplierHide' });
-	},
-
-	setWin: async (bookEvent: BookEventOfType<'setWin'>) => {
-		const { data } = bookEvent;
-		const winLevelAlias = getWinLevelAliasByMultiplier(data.multiplier);
-		const winLevelData = winLevelDataMap[winLevelAlias];
-
-		eventEmitter.broadcast({ type: 'winShow' });
-		eventEmitter.broadcast({
-			type: 'winUpdate',
-			amount: data.amount,
-			winLevelData,
-		});
-
-		await waitForTimeout(winLevelData.presentDuration);
-		eventEmitter.broadcast({ type: 'winHide' });
-	},
-
-	setTotalWin: async (bookEvent: BookEventOfType<'setTotalWin'>) => {
-		stateBet.winBookEventAmount = bookEvent.amount;
-	},
-
-	updateFreeSpin: async (bookEvent: BookEventOfType<'updateFreeSpin'>) => {
-		const { current, total } = bookEvent;
-		stateGame.freeSpinsRemaining = total - current;
-		stateGame.freeSpinsTotal = total;
-
-		eventEmitter.broadcast({ type: 'freeSpinCounterShow' });
-		eventEmitter.broadcast({
-			type: 'freeSpinCounterUpdate',
-			current,
-			total,
-		});
-	},
-
-	updateGlobalMult: async (bookEvent: BookEventOfType<'updateGlobalMult'>) => {
-		const { multiplier } = bookEvent;
-		stateGame.huntMultiplier = multiplier;
-		eventEmitter.broadcast({
-			type: 'huntMultiplierUpdate',
-			huntMultiplier: multiplier,
-			cascadeCount: stateGame.cascadeCount,
-			multCap: 500,
-		});
-	},
-
-	createBonusSnapshot: async (bookEvent: BookEventOfType<'createBonusSnapshot'>) => {
-		const { bookEvents } = bookEvent;
-		// Process snapshot events to restore state
-		for (const event of bookEvents) {
-			if (event.type === 'updateGlobalMult') {
-				stateGame.huntMultiplier = event.multiplier;
-			}
-			if (event.type === 'updateFreeSpin') {
-				stateGame.freeSpinsRemaining = event.total - event.current;
-				stateGame.freeSpinsTotal = event.total;
-			}
-			if (event.type === 'territoryExpand') {
-				stateGame.currentGrid = event.data.newGrid;
-				stateGame.territoryCounter = event.data.territoryCount;
-			}
-		}
-	},
-};
+  // Reset cascading state
+  setCascading(false);
+}

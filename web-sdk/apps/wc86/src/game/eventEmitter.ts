@@ -1,14 +1,74 @@
+/**
+ * WC86 - Wolf Club 86 - Event Emitter
+ * Wrapper typé pour la communication ELI → STEPH
+ */
+
 import { createEventEmitter } from 'utils-event-emitter';
-import type { EmitterEventHotKey } from 'components-shared';
-import type { EmitterEventUi } from 'components-ui-pixi';
-import type { EmitterEventModal } from 'components-ui-html';
+import type { EmitterEventMap, EmitterEventName, EmitterEventPayload } from './typesEmitterEvent';
 
-import type { EmitterEventGame } from './typesEmitterEvent';
+// ============================================================================
+// Event Emitter Instance
+// ============================================================================
 
-export type EmitterEvent =
-	| EmitterEventHotKey
-	| EmitterEventUi
-	| EmitterEventModal
-	| EmitterEventGame;
+const emitter = createEventEmitter<EmitterEventMap>();
 
-export const { eventEmitter } = createEventEmitter<EmitterEvent>();
+// ============================================================================
+// Typed API for ELI (emit)
+// ============================================================================
+
+/**
+ * Émet un event pour STEPH
+ * Utilisé par les book event handlers
+ */
+export async function emit<T extends EmitterEventName>(
+  event: T,
+  ...args: EmitterEventPayload<T> extends Record<string, never>
+    ? []
+    : [payload: EmitterEventPayload<T>]
+): Promise<void> {
+  return emitter.emit(event, ...args);
+}
+
+// ============================================================================
+// Typed API for STEPH (listen)
+// ============================================================================
+
+type EventCallback<T extends EmitterEventName> = EmitterEventPayload<T> extends Record<string, never>
+  ? () => void | Promise<void>
+  : (payload: EmitterEventPayload<T>) => void | Promise<void>;
+
+/**
+ * Écoute un event
+ * Utilisé par STEPH pour les animations
+ */
+export function on<T extends EmitterEventName>(event: T, callback: EventCallback<T>): void {
+  emitter.on(event, callback as never);
+}
+
+/**
+ * Arrête d'écouter un event
+ */
+export function off<T extends EmitterEventName>(event: T, callback: EventCallback<T>): void {
+  emitter.off(event, callback as never);
+}
+
+/**
+ * Écoute un event une seule fois
+ */
+export function once<T extends EmitterEventName>(event: T, callback: EventCallback<T>): void {
+  emitter.once(event, callback as never);
+}
+
+// ============================================================================
+// Export pour GameContext
+// ============================================================================
+
+/**
+ * Event emitter pour injection dans GameContext
+ */
+export const eventEmitter = {
+  emit,
+  on,
+  off,
+  once,
+};
