@@ -1,0 +1,117 @@
+{
+	"type": "alpha_domination_session",
+	"timestamp": 1704067200005,
+	"sessionId": "ad_session_001",
+	"bet": {
+		"amount": 100,
+		"currency": "USD",
+		"volatilityMode": "ALPHA"
+	},
+	"trigger": {
+		"spinId": "spin_alpha_trigger_001",
+		"triggerType": "5_scatters_in_free_spins",
+		"scatterCount": 5,
+		"scatterPositions": [
+			{"reel": 2, "row": 0},
+			{"reel": 0, "row": 1},
+			{"reel": 4, "row": 1},
+			{"reel": 3, "row": 2},
+			{"reel": 5, "row": 3}
+		]
+	},
+	"gridSize": {
+		"rows": 8,
+		"cols": 8
+	},
+	"startingMultiplier": 5,
+	"maxMultiplier": 500,
+	"currentMultiplier": 5,
+	"totalFreeSpins": 10,
+	"currentSpin": 1,
+	"spins": [
+		{
+			"spinIndex": 1,
+			"board": [
+				["BOSS_WOLF", "BOSS_WOLF", "ALPHA_WOLF", "BOSS_WOLF", "DICE", "HUSTLER", "COCKTAIL", "VIP_CARD"],
+				["TECH_BRO", "HOWLING_WILD", "COCKTAIL", "TECH_BRO", "DISCO_BALL", "DICE", "BOSS_WOLF", "DISCO_BALL"],
+				["DIAMOND_HANDS", "COCKTAIL", "BOSS_WOLF", "DIAMOND_HANDS", "VIP_CARD", "DISCO_BALL", "TECH_BRO", "COCKTAIL"],
+				["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD", "DIAMOND_HANDS", "DICE"],
+				["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL", "HUSTLER", "VIP_CARD"],
+				["COCKTAIL", "DICE", "HUSTLER", "DISCO_BALL", "TECH_BRO", "BOSS_WOLF", "DICE", "DISCO_BALL"],
+				["VIP_CARD", "COCKTAIL", "DICE", "BOSS_WOLF", "DIAMOND_HANDS", "TECH_BRO", "COCKTAIL", "BOSS_WOLF"],
+				["DISCO_BALL", "VIP_CARD", "COCKTAIL", "HUSTLER", "DICE", "DIAMOND_HANDS", "VIP_CARD", "TECH_BRO"]
+			],
+			"wins": [
+				{
+					"symbolId": "BOSS_WOLF",
+					"count": 4,
+					"positions": [
+						{"reel": 0, "row": 0},
+						{"reel": 1, "row": 0},
+						{"reel": 2, "row": 0},
+						{"reel": 3, "row": 0}
+					],
+					"ways": 128,
+					"baseWin": 500,
+					"multiplier": 5,
+					"totalWin": 2500
+				}
+			],
+			"features": {
+				"packSplit": {
+					"triggerPosition": {"reel": 2, "row": 0},
+					"multiplier": 2,
+					"additionalWin": 1000
+				},
+				"howlChain": {
+					"wildPositions": [
+						{"reel": 2, "row": 0, "multiplier": 3},
+						{"reel": 1, "row": 1, "multiplier": 2}
+					],
+					"chainMultiplier": 6
+				}
+			},
+			"cascades": [
+				{
+					"cascadeIndex": 1,
+					"wins": [
+						{
+							"symbolId": "TECH_BRO",
+							"count": 5,
+							"baseWin": 400,
+							"multiplier": 6,
+							"totalWin": 2400
+						}
+					],
+					"cascadeWin": 2400,
+					"multiplierIncrease": 1
+				},
+				{
+					"cascadeIndex": 2,
+					"wins": [
+						{
+							"symbolId": "DIAMOND_HANDS",
+							"count": 4,
+							"baseWin": 300,
+							"multiplier": 7,
+							"totalWin": 2100
+						}
+					],
+					"cascadeWin": 2100,
+					"multiplierIncrease": 1
+				}
+			],
+			"spinWin": 2500,
+			"totalSpinWin": 9500,
+			"multiplierAfter": 7
+		}
+	],
+	"totalSessionWin": 9500,
+	"finalMultiplier": 7,
+	"maxWinReached": false,
+	"maxWinCap": {
+		"LONE_WOLF": 10000,
+		"PACK": 25000,
+		"ALPHA": 50000
+	}
+}

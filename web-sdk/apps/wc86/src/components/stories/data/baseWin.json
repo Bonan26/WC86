@@ -1,0 +1,47 @@
+{
+	"type": "spin_result",
+	"timestamp": 1704067200000,
+	"spinId": "spin_base_001",
+	"bet": {
+		"amount": 100,
+		"currency": "USD",
+		"volatilityMode": "PACK"
+	},
+	"initialBoard": [
+		["BOSS_WOLF", "COCKTAIL", "VIP_CARD", "DISCO_BALL", "DICE", "HUSTLER"],
+		["TECH_BRO", "BOSS_WOLF", "COCKTAIL", "VIP_CARD", "DISCO_BALL", "DICE"],
+		["DIAMOND_HANDS", "TECH_BRO", "BOSS_WOLF", "COCKTAIL", "VIP_CARD", "DISCO_BALL"],
+		["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "BOSS_WOLF", "COCKTAIL", "VIP_CARD"],
+		["DICE", "HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "BOSS_WOLF", "COCKTAIL"]
+	],
+	"gridSize": {
+		"rows": 5,
+		"cols": 6
+	},
+	"wins": [
+		{
+			"symbolId": "BOSS_WOLF",
+			"count": 5,
+			"positions": [
+				{"reel": 0, "row": 0},
+				{"reel": 1, "row": 1},
+				{"reel": 2, "row": 2},
+				{"reel": 3, "row": 3},
+				{"reel": 4, "row": 4}
+			],
+			"ways": 32,
+			"baseWin": 500,
+			"multiplier": 1,
+			"totalWin": 500
+		}
+	],
+	"totalWin": 500,
+	"huntMultiplier": 1,
+	"features": {
+		"packSplit": null,
+		"howlChain": null,
+		"territoryExpand": null
+	},
+	"freeSpins": null,
+	"cascades": []
+}

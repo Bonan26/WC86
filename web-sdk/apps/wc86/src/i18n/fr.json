@@ -1,0 +1,92 @@
+{
+	"game": {
+		"title": "Wolf Club 86",
+		"loading": "Chargement...",
+		"tapToContinue": "Appuyez pour continuer",
+		"pressToContinue": "Appuyez pour continuer",
+		"enableSound": "Activer le son"
+	},
+	"volatility": {
+		"title": "Choisissez votre meute",
+		"loneWolf": {
+			"name": "Loup Solitaire",
+			"description": "Faible volatilité - Gains fréquents mais modestes",
+			"maxWin": "Gain Max: 10 000x"
+		},
+		"pack": {
+			"name": "Meute",
+			"description": "Volatilité moyenne - Risque et récompense équilibrés",
+			"maxWin": "Gain Max: 25 000x"
+		},
+		"alpha": {
+			"name": "Alpha",
+			"description": "Haute volatilité - Gains rares mais massifs",
+			"maxWin": "Gain Max: 50 000x"
+		}
+	},
+	"features": {
+		"huntMultiplier": "Multiplicateur de Chasse",
+		"cascadeWin": "Gain en Cascade",
+		"territoryProgress": "Progression du Territoire",
+		"territoryExpand": "Territoire Agrandi!",
+		"gridSize": "Grille: {{cols}}x{{rows}}",
+		"packSplit": "Division de Meute",
+		"howlChain": "Chaîne de Hurlement",
+		"wildMultiplier": "Wild x{{value}}"
+	},
+	"freeSpins": {
+		"title": "Chasse en Meute",
+		"triggered": "Chasse en Meute Déclenchée!",
+		"spinsAwarded": "{{count}} Tours Gratuits Accordés",
+		"remaining": "{{current}} sur {{total}} Tours",
+		"retrigger": "+{{count}} Tours Supplémentaires!",
+		"totalWin": "Gain Total"
+	},
+	"alphaDomination": {
+		"title": "Domination Alpha",
+		"triggered": "Domination Alpha Activée!",
+		"startingMultiplier": "Multiplicateur Initial: x{{value}}",
+		"maxMultiplier": "Multiplicateur Max: x{{value}}"
+	},
+	"wins": {
+		"bigWin": "Gros Gain!",
+		"megaWin": "Méga Gain!",
+		"epicWin": "Gain Épique!",
+		"maxWin": "Gain Maximum!",
+		"totalWin": "Gain Total"
+	},
+	"symbols": {
+		"bossWolf": "Loup Chef",
+		"hustler": "Arnaqueur",
+		"techBro": "Tech Bro",
+		"diamondHands": "Mains de Diamant",
+		"cocktail": "Cocktail",
+		"vipCard": "Carte VIP",
+		"discoBall": "Boule Disco",
+		"dice": "Dés",
+		"alphaWolf": "Loup Alpha (Wild)",
+		"howlingWild": "Wild Hurlant",
+		"moonScatter": "Scatter Lune",
+		"territory": "Territoire"
+	},
+	"ui": {
+		"balance": "Solde",
+		"bet": "Mise",
+		"win": "Gain",
+		"spin": "Tourner",
+		"autoplay": "Auto",
+		"turbo": "Turbo",
+		"menu": "Menu",
+		"paytable": "Table des Gains",
+		"settings": "Paramètres",
+		"history": "Historique",
+		"sound": "Son",
+		"music": "Musique",
+		"close": "Fermer"
+	},
+	"errors": {
+		"insufficientBalance": "Solde insuffisant",
+		"connectionLost": "Connexion perdue",
+		"tryAgain": "Veuillez réessayer"
+	}
+}

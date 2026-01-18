@@ -1,0 +1,102 @@
+{
+	"type": "spin_result",
+	"timestamp": 1704067200001,
+	"spinId": "spin_cascade_001",
+	"bet": {
+		"amount": 100,
+		"currency": "USD",
+		"volatilityMode": "PACK"
+	},
+	"initialBoard": [
+		["BOSS_WOLF", "BOSS_WOLF", "BOSS_WOLF", "DISCO_BALL", "DICE", "HUSTLER"],
+		["TECH_BRO", "TECH_BRO", "TECH_BRO", "VIP_CARD", "DISCO_BALL", "DICE"],
+		["DIAMOND_HANDS", "COCKTAIL", "BOSS_WOLF", "COCKTAIL", "VIP_CARD", "DISCO_BALL"],
+		["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD"],
+		["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL"]
+	],
+	"gridSize": {
+		"rows": 5,
+		"cols": 6
+	},
+	"wins": [
+		{
+			"symbolId": "BOSS_WOLF",
+			"count": 3,
+			"positions": [
+				{"reel": 0, "row": 0},
+				{"reel": 1, "row": 0},
+				{"reel": 2, "row": 0}
+			],
+			"ways": 8,
+			"baseWin": 150,
+			"multiplier": 1,
+			"totalWin": 150
+		},
+		{
+			"symbolId": "TECH_BRO",
+			"count": 3,
+			"positions": [
+				{"reel": 0, "row": 1},
+				{"reel": 1, "row": 1},
+				{"reel": 2, "row": 1}
+			],
+			"ways": 8,
+			"baseWin": 120,
+			"multiplier": 1,
+			"totalWin": 120
+		}
+	],
+	"totalWin": 270,
+	"huntMultiplier": 1,
+	"features": {
+		"packSplit": null,
+		"howlChain": null,
+		"territoryExpand": null
+	},
+	"freeSpins": null,
+	"cascades": [
+		{
+			"cascadeIndex": 1,
+			"removedPositions": [
+				{"reel": 0, "row": 0},
+				{"reel": 1, "row": 0},
+				{"reel": 2, "row": 0},
+				{"reel": 0, "row": 1},
+				{"reel": 1, "row": 1},
+				{"reel": 2, "row": 1}
+			],
+			"newSymbols": [
+				{"position": {"reel": 0, "row": 0}, "symbolId": "DIAMOND_HANDS"},
+				{"position": {"reel": 1, "row": 0}, "symbolId": "DIAMOND_HANDS"},
+				{"position": {"reel": 2, "row": 0}, "symbolId": "DIAMOND_HANDS"},
+				{"position": {"reel": 0, "row": 1}, "symbolId": "COCKTAIL"},
+				{"position": {"reel": 1, "row": 1}, "symbolId": "DISCO_BALL"},
+				{"position": {"reel": 2, "row": 1}, "symbolId": "VIP_CARD"}
+			],
+			"boardAfter": [
+				["DIAMOND_HANDS", "DIAMOND_HANDS", "DIAMOND_HANDS", "DISCO_BALL", "DICE", "HUSTLER"],
+				["COCKTAIL", "DISCO_BALL", "VIP_CARD", "VIP_CARD", "DISCO_BALL", "DICE"],
+				["DIAMOND_HANDS", "COCKTAIL", "BOSS_WOLF", "COCKTAIL", "VIP_CARD", "DISCO_BALL"],
+				["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD"],
+				["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL"]
+			],
+			"wins": [
+				{
+					"symbolId": "DIAMOND_HANDS",
+					"count": 3,
+					"positions": [
+						{"reel": 0, "row": 0},
+						{"reel": 1, "row": 0},
+						{"reel": 2, "row": 0}
+					],
+					"ways": 8,
+					"baseWin": 100,
+					"multiplier": 2,
+					"totalWin": 200
+				}
+			],
+			"cascadeWin": 200,
+			"huntMultiplier": 2
+		}
+	]
+}

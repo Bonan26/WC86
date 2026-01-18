@@ -1,0 +1,69 @@
+{
+	"type": "spin_result",
+	"timestamp": 1704067200002,
+	"spinId": "spin_packsplit_001",
+	"bet": {
+		"amount": 100,
+		"currency": "USD",
+		"volatilityMode": "ALPHA"
+	},
+	"initialBoard": [
+		["COCKTAIL", "VIP_CARD", "ALPHA_WOLF", "BOSS_WOLF", "DICE", "HUSTLER"],
+		["TECH_BRO", "DISCO_BALL", "COCKTAIL", "TECH_BRO", "DISCO_BALL", "DICE"],
+		["DIAMOND_HANDS", "COCKTAIL", "BOSS_WOLF", "DIAMOND_HANDS", "VIP_CARD", "DISCO_BALL"],
+		["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD"],
+		["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL"]
+	],
+	"gridSize": {
+		"rows": 5,
+		"cols": 6
+	},
+	"wins": [],
+	"totalWin": 0,
+	"huntMultiplier": 1,
+	"features": {
+		"packSplit": {
+			"triggerPosition": {"reel": 2, "row": 0},
+			"wildSymbol": "ALPHA_WOLF",
+			"multiplier": 3,
+			"duplicatedSymbols": [
+				{
+					"originalPosition": {"reel": 3, "row": 0},
+					"symbolId": "BOSS_WOLF",
+					"duplicatedTo": [
+						{"reel": 0, "row": 0},
+						{"reel": 1, "row": 0}
+					]
+				}
+			],
+			"boardAfterSplit": [
+				["BOSS_WOLF", "BOSS_WOLF", "ALPHA_WOLF", "BOSS_WOLF", "DICE", "HUSTLER"],
+				["TECH_BRO", "DISCO_BALL", "COCKTAIL", "TECH_BRO", "DISCO_BALL", "DICE"],
+				["DIAMOND_HANDS", "COCKTAIL", "BOSS_WOLF", "DIAMOND_HANDS", "VIP_CARD", "DISCO_BALL"],
+				["HUSTLER", "DIAMOND_HANDS", "TECH_BRO", "DICE", "COCKTAIL", "VIP_CARD"],
+				["DICE", "HUSTLER", "DIAMOND_HANDS", "VIP_CARD", "BOSS_WOLF", "COCKTAIL"]
+			],
+			"winsAfterSplit": [
+				{
+					"symbolId": "BOSS_WOLF",
+					"count": 4,
+					"positions": [
+						{"reel": 0, "row": 0},
+						{"reel": 1, "row": 0},
+						{"reel": 2, "row": 0},
+						{"reel": 3, "row": 0}
+					],
+					"ways": 16,
+					"baseWin": 300,
+					"multiplier": 3,
+					"totalWin": 900
+				}
+			],
+			"totalWinFromSplit": 900
+		},
+		"howlChain": null,
+		"territoryExpand": null
+	},
+	"freeSpins": null,
+	"cascades": []
+}
