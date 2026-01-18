@@ -1,0 +1,105 @@
+{
+  "name": "territoryExpand",
+  "description": "Grid expansion effect",
+  "animations": {
+    "expand_7x6": {
+      "type": "grid_expand",
+      "duration": 1000,
+      "loop": false,
+      "from_grid": "6x5",
+      "to_grid": "7x6",
+      "keyframes": [
+        {
+          "time": 0,
+          "scale": 1.0,
+          "glow": 0
+        },
+        {
+          "time": 0.3,
+          "scale": 1.05,
+          "glow": 15,
+          "shake": 3
+        },
+        {
+          "time": 0.6,
+          "expand_progress": 0.5,
+          "glow": 20
+        },
+        {
+          "time": 1.0,
+          "expand_progress": 1.0,
+          "scale": 1.0,
+          "glow": 0
+        }
+      ]
+    },
+    "expand_8x7": {
+      "type": "grid_expand",
+      "duration": 1000,
+      "loop": false,
+      "from_grid": "7x6",
+      "to_grid": "8x7",
+      "keyframes": [
+        {
+          "time": 0,
+          "scale": 1.0,
+          "glow": 0
+        },
+        {
+          "time": 0.3,
+          "scale": 1.05,
+          "glow": 15,
+          "shake": 3
+        },
+        {
+          "time": 0.6,
+          "expand_progress": 0.5,
+          "glow": 20
+        },
+        {
+          "time": 1.0,
+          "expand_progress": 1.0,
+          "scale": 1.0,
+          "glow": 0
+        }
+      ]
+    },
+    "expand_8x8": {
+      "type": "grid_expand",
+      "duration": 1200,
+      "loop": false,
+      "from_grid": "8x7",
+      "to_grid": "8x8",
+      "keyframes": [
+        {
+          "time": 0,
+          "scale": 1.0,
+          "glow": 0
+        },
+        {
+          "time": 0.2,
+          "scale": 1.08,
+          "glow": 20,
+          "shake": 5
+        },
+        {
+          "time": 0.5,
+          "expand_progress": 0.5,
+          "glow": 30,
+          "flash": true
+        },
+        {
+          "time": 0.8,
+          "expand_progress": 0.8,
+          "glow": 20
+        },
+        {
+          "time": 1.0,
+          "expand_progress": 1.0,
+          "scale": 1.0,
+          "glow": 0
+        }
+      ]
+    }
+  }
+}

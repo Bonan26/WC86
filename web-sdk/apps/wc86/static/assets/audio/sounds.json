@@ -1,0 +1,211 @@
+{
+  "src": [
+    "sounds.mp3"
+  ],
+  "sprite": {
+    "bgm_main": [
+      0,
+      5750,
+      true
+    ],
+    "bgm_freespin": [
+      5750,
+      5750,
+      true
+    ],
+    "bgm_alpha_domination": [
+      11500,
+      5750,
+      true
+    ],
+    "sfx_spin_start": [
+      17250,
+      1509
+    ],
+    "sfx_reel_stop_1": [
+      18759,
+      291
+    ],
+    "sfx_reel_stop_2": [
+      19050,
+      1000
+    ],
+    "sfx_reel_stop_3": [
+      20050,
+      291
+    ],
+    "sfx_reel_stop_4": [
+      20341,
+      1000
+    ],
+    "sfx_reel_stop_5": [
+      21341,
+      291
+    ],
+    "sfx_reel_stop_6": [
+      21632,
+      1000
+    ],
+    "sfx_anticipation": [
+      22632,
+      1000
+    ],
+    "sfx_scatter_stop_1": [
+      23632,
+      4368
+    ],
+    "sfx_scatter_stop_2": [
+      28000,
+      4368
+    ],
+    "sfx_scatter_stop_3": [
+      32368,
+      4368
+    ],
+    "sfx_scatter_stop_4": [
+      36736,
+      4368
+    ],
+    "sfx_scatter_stop_5": [
+      41104,
+      4368
+    ],
+    "sfx_scatter_stop_6": [
+      45472,
+      4368
+    ],
+    "sfx_scatter_win": [
+      49840,
+      4038
+    ],
+    "sfx_win_small": [
+      53878,
+      1102
+    ],
+    "sfx_win_medium": [
+      54980,
+      1754
+    ],
+    "sfx_win_large": [
+      56734,
+      2437
+    ],
+    "tumble_win_1": [
+      59171,
+      1594
+    ],
+    "tumble_win_2": [
+      60765,
+      1594
+    ],
+    "tumble_win_3": [
+      62359,
+      1594
+    ],
+    "tumble_win_4": [
+      63953,
+      1594
+    ],
+    "tumble_win_5": [
+      65547,
+      1594
+    ],
+    "sfx_bigwin_coinloop": [
+      67141,
+      1338,
+      true
+    ],
+    "sfx_youwon_panel": [
+      68479,
+      4309
+    ],
+    "sfx_multiplier_up": [
+      72788,
+      4309
+    ],
+    "sfx_multiplier_max": [
+      77097,
+      4038
+    ],
+    "sfx_pack_split": [
+      81135,
+      1868
+    ],
+    "sfx_howl_chain_add": [
+      83003,
+      1608
+    ],
+    "sfx_howl_chain_multi": [
+      84611,
+      1608
+    ],
+    "sfx_territory_expand": [
+      86219,
+      1000
+    ],
+    "sfx_freespin_trigger": [
+      87219,
+      4038
+    ],
+    "sfx_freespin_intro": [
+      91257,
+      4368
+    ],
+    "sfx_freespin_retrigger": [
+      95625,
+      4038
+    ],
+    "sfx_alpha_domination_intro": [
+      99663,
+      1868
+    ],
+    "sfx_wolf_howl_1": [
+      101531,
+      23806
+    ],
+    "sfx_wolf_howl_2": [
+      125337,
+      1213
+    ],
+    "sfx_cascade_explosion": [
+      126550,
+      1868
+    ],
+    "sfx_symbols_landing": [
+      128418,
+      1000
+    ],
+    "sfx_btn_general": [
+      129418,
+      199
+    ],
+    "sfx_btn_spin": [
+      129617,
+      199
+    ],
+    "sfx_menu_open": [
+      129816,
+      2347
+    ]
+  },
+  "config": {
+    "bgm_main": {
+      "volume": 0.7
+    },
+    "bgm_freespin": {
+      "volume": 0.8
+    },
+    "bgm_alpha_domination": {
+      "volume": 0.9
+    },
+    "sfx_bigwin_coinloop": {
+      "volume": 0.8
+    },
+    "sfx_wolf_howl_1": {
+      "volume": 1.0
+    },
+    "sfx_wolf_howl_2": {
+      "volume": 1.0
+    }
+  }
+}
